@@ -1,0 +1,1 @@
+# neos-fusion-linter
