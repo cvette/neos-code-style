@@ -1,0 +1,32 @@
+rules:
+  prototypeNamePrefix:
+    class: 'Vette\Neos\CodeStyle\Rules\Neos\PrototypeNamePrefixRule'
+    severity: warning
+    options:
+      validPrefixes: ['Content', 'Document', 'Component', 'Helper', 'Presentation', 'Integration']
+  onlyIncludesInRootFile:
+    class: 'Vette\Neos\CodeStyle\Rules\Neos\OnlyIncludesInRootRule'
+    severity: info
+  onePrototypePerFile:
+    class: 'Vette\Neos\CodeStyle\Rules\Neos\OnePrototypePerFileRule'
+  fluidTemplate:
+    class: 'Vette\Neos\CodeStyle\Rules\Neos\FluidTemplateRule'
+    severity: error
+  emptyBlock:
+    class: 'Vette\Neos\CodeStyle\Rules\Generic\EmptyBlockRule'
+    severity: error
+  operatorSpacing:
+    class: 'Vette\Neos\CodeStyle\Rules\Generic\OperatorSpacingRule'
+    severity: error
+
+ruleSets:
+  default:
+    include: ['generic', 'neos']
+  neos:
+    rules: ['fluidTemplate', 'onePrototypePerFile', 'onlyIncludesInRootFile', 'prototypeNamePrefix']
+  generic:
+    rules: ['operatorSpacing', 'emptyBlock']
+
+neosRoot:
+files: []
+defaultRuleSet: default

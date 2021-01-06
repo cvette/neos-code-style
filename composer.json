@@ -1,0 +1,25 @@
+{
+    "name": "vette/neos-code-style",
+    "description": "",
+    "authors": [
+        {
+            "name": "Christian Vette",
+            "email": "github@christianvette.de"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Vette\\Neos\\CodeStyle\\": "src/"
+        }
+    },
+    "require": {
+        "symfony/console": "^5.1",
+        "symfony/filesystem": "^5.1",
+        "symfony/yaml": "^5.1",
+        "cvette/neos-fusion-parser": "^1.0",
+        "symfony/config": "^5.2"
+    },
+    "require-dev": {
+        "vimeo/psalm": "^4.6"
+    }
+}

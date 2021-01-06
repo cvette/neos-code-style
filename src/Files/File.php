@@ -1,0 +1,108 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Vette\Neos\CodeStyle\Files;
+
+use Vette\Neos\CodeStyle\Packages\Package;
+use Vette\FusionParser\TokenStream;
+
+/**
+ * Class File
+ *
+ * @package Vette\Neos\CodeStyle\Files
+ */
+class File
+{
+    /**
+     * @var string
+     */
+    protected string $path;
+
+    /**
+     * @var string
+     */
+    protected string $realPath;
+
+    /**
+     * @var Package|null
+     */
+    protected ?Package $package;
+
+    /**
+     * @var TokenStream
+     */
+    protected TokenStream $tokenStream;
+
+    /**
+     * @var Error[]
+     */
+    protected array $errors = [];
+
+
+    /**
+     * File constructor.
+     *
+     * @param string $path
+     * @param Package|null $package
+     */
+    public function __construct(string $path, ?Package $package = null)
+    {
+        $this->path = $path;
+        $this->realPath = realpath($path);
+        $this->package = $package;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPath(): string
+    {
+        return $this->path;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRealPath(): string
+    {
+        return $this->realPath;
+    }
+
+    /**
+     * @return Package|null
+     */
+    public function getPackage(): ?Package
+    {
+        return $this->package;
+    }
+
+    /**
+     * @return TokenStream
+     */
+    public function getTokenStream(): TokenStream
+    {
+        return $this->tokenStream;
+    }
+
+    /**
+     * @param TokenStream $tokenStream
+     */
+    public function setTokenStream(TokenStream $tokenStream): void
+    {
+        $this->tokenStream = $tokenStream;
+    }
+
+    public function addError(string $error, int $lineNumber, string $severity): void
+    {
+        $this->errors[] = new Error($error, $lineNumber, $severity);
+    }
+
+    /**
+     * @return Error[]
+     */
+    public function getErrors(): array
+    {
+        return $this->errors;
+    }
+}

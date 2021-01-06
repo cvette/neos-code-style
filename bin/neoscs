@@ -1,0 +1,24 @@
+#!/usr/bin/env php
+<?php
+
+use Symfony\Component\Console\Application;
+use Vette\Neos\CodeStyle\Console\Command\RunCommand;
+
+if (file_exists(__DIR__ . '/../autoload.php')) {
+    require_once __DIR__ . '/../autoload.php';
+} elseif (file_exists(__DIR__ . '/../vendor/autoload.php')) {
+    require_once __DIR__ . '/../vendor/autoload.php';
+} elseif (file_exists(__DIR__ . '/../../../autoload.php')) {
+    require_once __DIR__ . '/../../../autoload.php';
+}
+
+$app = new Application();
+$app->add(new RunCommand());
+$app->setDefaultCommand('run', true);
+
+try {
+    $app->run();
+} catch (Exception $e) {
+    echo $e->getMessage() . PHP_EOL;
+    exit(1);
+}
