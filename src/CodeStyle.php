@@ -40,7 +40,7 @@ class CodeStyle
      */
     public function __construct(Parameters $parameters)
     {
-        $configFiles = [YAML::parseFile('src/config.yaml')];
+        $configFiles = [YAML::parseFile(__DIR__ . '/config.yaml')];
 
         // Override default config with config file specified via command option
         $userConfigFile = $parameters->getConfigFile();
