@@ -21,5 +21,8 @@
     },
     "require-dev": {
         "vimeo/psalm": "^4.6"
-    }
+    },
+    "bin": [
+        "bin/neoscs"
+    ]
 }
