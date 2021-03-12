@@ -22,6 +22,9 @@
     "require-dev": {
         "vimeo/psalm": "^4.6"
     },
+    "scripts": {
+        "compile": "box compile"
+    },
     "bin": [
         "bin/neoscs"
     ]
