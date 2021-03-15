@@ -18,12 +18,20 @@ rules:
   operatorSpacing:
     class: 'Vette\Neos\CodeStyle\Rules\Generic\OperatorSpacingRule'
     severity: error
+  nodeProperties:
+    class: 'Vette\Neos\CodeStyle\Rules\Neos\NodePropertiesRule'
+    severity: error
 
 ruleSets:
   default:
     include: ['generic', 'neos']
   neos:
-    rules: ['fluidTemplate', 'onePrototypePerFile', 'onlyIncludesInRootFile', 'prototypeNamePrefix']
+    rules:
+      - 'fluidTemplate'
+      - 'onePrototypePerFile'
+      - 'onlyIncludesInRootFile'
+      - 'prototypeNamePrefix'
+      - 'nodeProperties'
   generic:
     rules: ['operatorSpacing', 'emptyBlock']
 
