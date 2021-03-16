@@ -20,7 +20,14 @@ class OperatorSpacingRule extends Rule
      */
     protected array $tokenTypes = [
         Token::ASSIGNMENT_TYPE,
-        Token::COPY_TYPE
+        Token::COPY_TYPE,
+        Token::EEL_AND_OPERATOR_TYPE,
+        Token::EEL_OR_OPERATOR_TYPE,
+        Token::EEL_ADDITION_OPERATOR_TYPE,
+        Token::EEL_SUBTRACTION_OPERATOR_TYPE,
+        Token::EEL_MULTIPLICATION_OPERATOR_TYPE,
+        Token::EEL_DIVISION_OPERATOR_TYPE,
+        Token::EEL_MODULO_OPERATOR_TYPE
     ];
 
     function process(int $tokenStreamIndex, File $file, int $level): void
