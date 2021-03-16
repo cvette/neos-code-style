@@ -33,7 +33,8 @@ class RunCommand extends Command
     {
         $this->addOption('neosRoot', 'nr', InputOption::VALUE_OPTIONAL,'The root directory of a Neos distribution');
         $this->addOption('config','c',InputOption::VALUE_OPTIONAL);
-        $this->addOption('ruleSet','r',InputOption::VALUE_OPTIONAL);
+        $this->addOption('ruleSet','s',InputOption::VALUE_OPTIONAL);
+        $this->addOption('report','r',InputOption::VALUE_OPTIONAL);
 
         $this->addArgument('files', InputArgument::IS_ARRAY,'The directories to check');
     }

@@ -35,6 +35,12 @@ ruleSets:
   generic:
     rules: ['operatorSpacing', 'emptyBlock']
 
+reports:
+  console:
+    class: Vette\Neos\CodeStyle\Reports\Console
+
 neosRoot:
 files: []
+
+defaultReport: console
 defaultRuleSet: default

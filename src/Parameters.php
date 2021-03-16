@@ -20,6 +20,7 @@ class Parameters
     protected ?string $neosRoot;
     protected ?string $configFile = null;
     protected ?string $ruleset = null;
+    protected ?string $report = null;
 
 
     /**
@@ -84,5 +85,21 @@ class Parameters
     public function setRuleset(?string $ruleset): void
     {
         $this->ruleset = $ruleset;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getReport(): ?string
+    {
+        return $this->report;
+    }
+
+    /**
+     * @param string|null $report
+     */
+    public function setReport(?string $report): void
+    {
+        $this->report = $report;
     }
 }

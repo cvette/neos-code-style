@@ -10,7 +10,7 @@ use Vette\Neos\CodeStyle\Files\Error;
 use Vette\Neos\CodeStyle\Files\File;
 use Vette\Neos\CodeStyle\Files\FileCollection;
 use Vette\Neos\CodeStyle\Packages\PackageCollection;
-use Vette\Neos\CodeStyle\Reports\Console;
+use Vette\Neos\CodeStyle\Reports\Report;
 use Vette\Neos\CodeStyle\Rules\Rule;
 use Vette\Neos\CodeStyle\Rules\RuleCollection;
 use Vette\FusionParser\Lexer;
@@ -30,6 +30,7 @@ class CodeStyle
     protected FileCollection $fileCollection;
     protected PackageCollection $packageCollection;
     protected RuleCollection $ruleCollection;
+    protected Report $report;
     protected array $config;
 
 
@@ -55,6 +56,10 @@ class CodeStyle
             $this->config['defaultRuleSet'] = $parameters->getRuleset();
         }
 
+        if ($parameters->getReport()) {
+            $this->config['defaultReport'] = $parameters->getReport();
+        }
+
         if (!empty($parameters->getFiles())) {
             $this->config['files'] = $parameters->getFiles();
         }
@@ -77,14 +82,39 @@ class CodeStyle
         $this->fileCollection = new FileCollection($this->config['files'], $this->packageCollection);
 
         $this->initRules();
+        $this->initReport();
 
-        $reporter = new Console();
         foreach ($this->fileCollection as $file) {
             $this->processFile($file);
-            $reporter->reportFile($file);
+            $this->report->reportFile($file);
         }
 
-        echo $reporter->generate();
+        echo $this->report->generate();
+    }
+
+    /**
+     * @throws Exception
+     */
+    protected function initReport(): void
+    {
+        $defaultReport = $this->config['defaultReport'];
+        $this->config['reports'][$defaultReport];
+
+        if (!isset($this->config['reports'][$defaultReport])) {
+            throw new Exception('report is not defined: ' . $defaultReport);
+        }
+
+        $className = $this->config['reports'][$defaultReport]['class'];
+        if (!class_exists($className)) {
+            throw new Exception('class does not exist: ' . $className);
+        }
+
+        $report = new $className();
+        if (!$report instanceof Report) {
+            throw new Exception('class does extend Report: ' . $className);
+        }
+
+        $this->report = $report;
     }
 
     /**
