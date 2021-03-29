@@ -38,6 +38,8 @@ ruleSets:
 reports:
   console:
     class: Vette\Neos\CodeStyle\Reports\Console
+  checkstyle:
+    class: Vette\Neos\CodeStyle\Reports\Checkstyle
 
 neosRoot:
 files: []
