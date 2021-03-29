@@ -11,7 +11,7 @@ namespace Vette\Neos\CodeStyle\Files;
  */
 class Error
 {
-    public const SEVERITY_INFO = 'INFO';
+    public const SEVERITY_INFO = 'info';
     public const SEVERITY_WARNING = 'warning';
     public const SEVERITY_ERROR = 'error';
 
@@ -26,6 +26,11 @@ class Error
     protected int $lineNumber;
 
     /**
+     * @var int
+     */
+    protected int $column;
+
+    /**
      * @var string
      */
     protected string $severity;
@@ -36,12 +41,14 @@ class Error
      *
      * @param string $message
      * @param int $lineNumber
+     * @param int $column
      * @param string $severity
      */
-    public function __construct(string $message, int $lineNumber, string $severity = Error::SEVERITY_INFO)
+    public function __construct(string $message, int $lineNumber, int $column, string $severity = Error::SEVERITY_INFO)
     {
         $this->message = $message;
         $this->lineNumber = $lineNumber;
+        $this->column = $column;
         $this->severity = $severity;
     }
 
@@ -59,6 +66,14 @@ class Error
     public function getLineNumber(): int
     {
         return $this->lineNumber;
+    }
+
+    /**
+     * @return int
+     */
+    public function getColumn(): int
+    {
+        return $this->column;
     }
 
     /**

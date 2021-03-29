@@ -221,7 +221,7 @@ class CodeStyle
                 }
             }
         } catch (LexerException $exception) {
-            $file->addError($exception->getMessage(), $exception->getLine(), Error::SEVERITY_ERROR);
+            $file->addError($exception->getMessage(), $exception->getLine(), $exception->getPosition(), Error::SEVERITY_ERROR);
         }
     }
 

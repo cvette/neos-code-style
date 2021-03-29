@@ -33,7 +33,7 @@ class NodePropertiesRule extends FusionRule
             if ($nextToken->getType() === Token::EEL_IDENTIFIER_SEPARATOR_TYPE) {
                 $nextToken = $file->getTokenStream()->findNextNonWhitespaceToken($tokenStreamIndex + 2);
                 if ($nextToken->getType() === Token::EEL_IDENTIFIER_TYPE && $nextToken->getValue() === 'properties') {
-                    $file->addError('Node properties should only be accessed individually via "q(node).property()"', $identifierToken->getLine(), $this->severity);
+                    $file->addError('Node properties should only be accessed individually via "q(node).property()"', $identifierToken->getLine(), $identifierToken->getColumn(), $this->severity);
                 }
             }
         }

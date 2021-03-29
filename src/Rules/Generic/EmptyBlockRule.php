@@ -27,7 +27,7 @@ class EmptyBlockRule extends Rule
         $nextNonWhitespaceToken = $file->getTokenStream()->findNextNonWhitespaceToken($tokenStreamIndex + 1);
         if ($nextNonWhitespaceToken instanceof Token && $nextNonWhitespaceToken->getType() === Token::RBRACE_TYPE) {
             $current = $file->getTokenStream()->getTokenAt($tokenStreamIndex);
-            $file->addError('Empty block found', $current->getLine(), $this->severity);
+            $file->addError('Empty block found', $current->getLine(),$current->getColumn(), $this->severity);
         }
     }
 }

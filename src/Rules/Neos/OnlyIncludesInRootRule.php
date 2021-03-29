@@ -39,7 +39,7 @@ class OnlyIncludesInRootRule extends Rule
         for ($i = 0; $i < $file->getTokenStream()->count(); $i++) {
             $token = $file->getTokenStream()->getTokenAt($i);
             if ($token instanceof Token && !in_array($token->getType(), self::ALLOWED_TOKEN_TYPES)) {
-                $file->addError('The Root.fusion file should only include other files', $token->getLine(), $this->severity);
+                $file->addError('The Root.fusion file should only include other files', $token->getLine(), $token->getColumn(), $this->severity);
                 return;
             }
         }

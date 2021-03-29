@@ -36,7 +36,7 @@ class FluidTemplateRule extends Rule
             && $namespace instanceof Token
             && $namespace->getValue() === 'Neos.Fusion') {
 
-            $file->addError('AFX should be used instead of Fluid templates', $namespace->getLine(), $this->severity);
+            $file->addError('AFX should be used instead of Fluid templates', $namespace->getLine(), $namespace->getColumn(), $this->severity);
         }
     }
 }

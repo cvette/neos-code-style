@@ -93,9 +93,9 @@ class File
         $this->tokenStream = $tokenStream;
     }
 
-    public function addError(string $error, int $lineNumber, string $severity): void
+    public function addError(string $error, int $lineNumber, int $column, string $severity): void
     {
-        $this->errors[] = new Error($error, $lineNumber, $severity);
+        $this->errors[] = new Error($error, $lineNumber, $column, $severity);
     }
 
     /**
