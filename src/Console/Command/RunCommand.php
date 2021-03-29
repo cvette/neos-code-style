@@ -57,6 +57,7 @@ class RunCommand extends Command
 
         $params->setNeosRoot($input->getOption('neosRoot'));
         $params->setConfigFile($input->getOption('config'));
+        $params->setReport($input->getOption('report'));
         $params->setRuleSet($input->getOption('ruleSet'));
 
         $codeStyle = new CodeStyle($params);
