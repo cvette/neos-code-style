@@ -18,7 +18,7 @@ class OperatorSpacingRule extends Rule
     /**
      * @var int[]
      */
-    protected array $tokenTypes = [
+    protected $tokenTypes = [
         Token::ASSIGNMENT_TYPE,
         Token::COPY_TYPE,
         Token::EEL_AND_OPERATOR_TYPE,
@@ -30,7 +30,7 @@ class OperatorSpacingRule extends Rule
         Token::EEL_MODULO_OPERATOR_TYPE
     ];
 
-    function process(int $tokenStreamIndex, File $file, int $level): void
+    public function process(int $tokenStreamIndex, File $file, int $level): void
     {
         $previous = $file->getTokenStream()->getTokenAt($tokenStreamIndex - 1);
         $next = $file->getTokenStream()->getTokenAt($tokenStreamIndex + 1);

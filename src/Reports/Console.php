@@ -17,7 +17,7 @@ class Console extends Report
     /**
      * @var string[]
      */
-    protected array $fileReports = [];
+    protected $fileReports = [];
 
 
     /**
@@ -71,6 +71,6 @@ class Console extends Report
      */
     public function generate(): string
     {
-        return join(PHP_EOL, $this->fileReports);
+        return implode(PHP_EOL, $this->fileReports);
     }
 }

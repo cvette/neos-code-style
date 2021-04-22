@@ -15,12 +15,27 @@ class Parameters
     /**
      * @var string[]
      */
-    protected array $files = [];
+    protected $files = [];
 
-    protected ?string $neosRoot;
-    protected ?string $configFile = null;
-    protected ?string $ruleset = null;
-    protected ?string $report = null;
+    /**
+     * @var string
+     */
+    protected $neosRoot;
+
+    /**
+     * @var string
+     */
+    protected $configFile;
+
+    /**
+     * @var string
+     */
+    protected $ruleset;
+
+    /**
+     * @var string
+     */
+    protected $report;
 
 
     /**

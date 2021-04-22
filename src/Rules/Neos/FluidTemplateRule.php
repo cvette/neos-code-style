@@ -18,11 +18,11 @@ class FluidTemplateRule extends Rule
     /**
      * @var int[]
      */
-    protected array $tokenTypes = [
+    protected $tokenTypes = [
         Token::OBJECT_IDENTIFIER_TYPE
     ];
 
-    function process(int $tokenStreamIndex, File $file, int $level): void
+    public function process(int $tokenStreamIndex, File $file, int $level): void
     {
         $namespace = $file->getTokenStream()->getTokenAt($tokenStreamIndex);
         $colon = $file->getTokenStream()->getTokenAt($tokenStreamIndex + 1);

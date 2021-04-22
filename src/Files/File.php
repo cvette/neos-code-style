@@ -17,27 +17,27 @@ class File
     /**
      * @var string
      */
-    protected string $path;
+    protected $path;
 
     /**
      * @var string
      */
-    protected string $realPath;
+    protected $realPath;
 
     /**
      * @var Package|null
      */
-    protected ?Package $package;
+    protected $package;
 
     /**
      * @var TokenStream
      */
-    protected TokenStream $tokenStream;
+    protected $tokenStream;
 
     /**
      * @var Error[]
      */
-    protected array $errors = [];
+    protected $errors = [];
 
 
     /**

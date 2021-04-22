@@ -17,7 +17,7 @@ class Checkstyle extends Report
     /**
      * @var string[]
      */
-    protected array $fileReports = [];
+    protected $fileReports = [];
 
 
     /**
@@ -67,7 +67,7 @@ class Checkstyle extends Report
     {
         $output = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
         $output .= '<checkstyle>' . "\n";
-        $output .= join("\n", $this->fileReports);
+        $output .= implode("\n", $this->fileReports);
         $output .= '</checkstyle>' . "\n";
         return $output;
     }

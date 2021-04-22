@@ -14,16 +14,19 @@ use Vette\Neos\CodeStyle\Files\File;
  */
 abstract class Rule
 {
-    const FILE_START_TOKEN_TYPE = 99;
+    public const FILE_START_TOKEN_TYPE = 99;
 
     /**
      * @var int[]
      */
-    protected array $tokenTypes;
+    protected $tokenTypes;
 
-    protected array $options;
+    /**
+     * @var array
+     */
+    protected $options;
 
-    protected string $severity = Error::SEVERITY_INFO;
+    protected $severity = Error::SEVERITY_INFO;
 
 
     /**
@@ -42,11 +45,7 @@ abstract class Rule
      */
     public function getOption(string $key)
     {
-        if (!isset($this->options[$key])) {
-            return null;
-        }
-
-        return $this->options[$key];
+        return $this->options[$key] ?? null;
     }
 
     /**
@@ -80,5 +79,5 @@ abstract class Rule
      * @param File $file
      * @param int $level
      */
-    abstract function process(int $tokenStreamIndex, File $file, int $level): void;
+    abstract public function process(int $tokenStreamIndex, File $file, int $level): void;
 }

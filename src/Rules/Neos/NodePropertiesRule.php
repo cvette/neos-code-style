@@ -15,17 +15,17 @@ use Vette\Neos\CodeStyle\Rules\FusionRule;
  */
 class NodePropertiesRule extends FusionRule
 {
-    const EEL_IDENTIFIER_VALUES = ['node', 'documentNode', 'site'];
+    protected const EEL_IDENTIFIER_VALUES = ['node', 'documentNode', 'site'];
 
     /**
      * @var int[]
      */
-    protected array $tokenTypes = [
+    protected $tokenTypes = [
         Token::EEL_IDENTIFIER_TYPE
     ];
 
 
-    function process(int $tokenStreamIndex, File $file, int $level): void
+    public function process(int $tokenStreamIndex, File $file, int $level): void
     {
         $identifierToken = $file->getTokenStream()->getTokenAt($tokenStreamIndex);
         if (in_array($identifierToken->getValue(),self::EEL_IDENTIFIER_VALUES)) {

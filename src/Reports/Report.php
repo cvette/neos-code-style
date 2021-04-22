@@ -13,6 +13,6 @@ use Vette\Neos\CodeStyle\Files\File;
  */
 abstract class Report
 {
-    public abstract function reportFile(File $file): void;
-    public abstract function generate(): string;
+    abstract public function reportFile(File $file): void;
+    abstract public function generate(): string;
 }

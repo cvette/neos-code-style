@@ -22,12 +22,12 @@ class FileCollection implements Iterator, Countable
     /**
      * @var PackageCollection
      */
-    protected PackageCollection $packageCollection;
+    protected $packageCollection;
 
     /**
      * @var File[]
      */
-    protected array $files = [];
+    protected $files = [];
 
 
     /**
@@ -85,13 +85,13 @@ class FileCollection implements Iterator, Countable
         }
     }
 
-    public function current()
+    public function current(): File
     {
         $path = key($this->files);
         return $this->files[$path];
     }
 
-    public function next()
+    public function next(): void
     {
         next($this->files);
     }
@@ -101,21 +101,17 @@ class FileCollection implements Iterator, Countable
         return key($this->files);
     }
 
-    public function valid()
+    public function valid(): bool
     {
-        if (current($this->files) === false) {
-            return false;
-        }
-
-        return true;
+        return !(current($this->files) === false);
     }
 
-    public function rewind()
+    public function rewind(): void
     {
         reset($this->files);
     }
 
-    public function count()
+    public function count(): int
     {
         return count($this->files);
     }
