@@ -18,22 +18,22 @@ class Error
     /**
      * @var string
      */
-    protected string $message;
+    protected $message;
 
     /**
      * @var int
      */
-    protected int $lineNumber;
+    protected $lineNumber;
 
     /**
      * @var int
      */
-    protected int $column;
+    protected $column;
 
     /**
      * @var string
      */
-    protected string $severity;
+    protected $severity;
 
 
     /**

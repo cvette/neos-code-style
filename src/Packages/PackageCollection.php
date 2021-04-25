@@ -17,7 +17,7 @@ class PackageCollection implements Iterator
     /**
      * @var Package[]
      */
-    protected array $packages = [];
+    protected $packages = [];
 
 
     /**
@@ -28,12 +28,13 @@ class PackageCollection implements Iterator
     public function __construct(?string $neosRoot)
     {
         if ($neosRoot !== null && is_dir($neosRoot)) {
-            $path = join(DIRECTORY_SEPARATOR, [$neosRoot, 'Data', 'Temporary', 'PackageInformationCache.php']);
-            $packagesPath = join(DIRECTORY_SEPARATOR, [$neosRoot, 'Packages']);
+            $path = implode(DIRECTORY_SEPARATOR, [$neosRoot, 'Data', 'Temporary', 'PackageInformationCache.php']);
+            $packagesPath = implode(DIRECTORY_SEPARATOR, [$neosRoot, 'Packages']);
             if (is_file($path)) {
+                /** @noinspection PhpIncludeInspection */
                 $packageCache = include $path;
                 foreach ($packageCache['packages'] as $package) {
-                    $packagePath = join(DIRECTORY_SEPARATOR, [$packagesPath, $package['packagePath']]);
+                    $packagePath = implode(DIRECTORY_SEPARATOR, [$packagesPath, $package['packagePath']]);
                     $realPackagePath = realpath($packagePath);
                     $this->packages[$realPackagePath] = new Package($package['packageKey'], $package['packagePath'], $realPackagePath);
                 }
@@ -66,27 +67,23 @@ class PackageCollection implements Iterator
         return null;
     }
 
-    public function current()
+    public function current(): Package
     {
         $path = key($this->packages);
         return $this->packages[$path];
     }
 
-    public function next()
+    public function next(): void
     {
         next($this->packages);
     }
 
-    public function valid()
+    public function valid(): bool
     {
-        if (current($this->packages) === false) {
-            return false;
-        }
-
-        return true;
+        return !(current($this->packages) === false);
     }
 
-    public function rewind()
+    public function rewind(): void
     {
         reset($this->packages);
     }

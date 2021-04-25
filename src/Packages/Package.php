@@ -14,17 +14,17 @@ class Package
     /**
      * @var string
      */
-    protected string $key;
+    protected $key;
 
     /**
      * @var string
      */
-    protected string $path;
+    protected $path;
 
     /**
      * @var string
      */
-    protected string $realPath;
+    protected $realPath;
 
 
     /**

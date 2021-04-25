@@ -18,11 +18,11 @@ class OnlyIncludesInRootRule extends Rule
     /**
      * @var int[]
      */
-    protected array $tokenTypes = [
+    protected $tokenTypes = [
         Rule::FILE_START_TOKEN_TYPE
     ];
 
-    const ALLOWED_TOKEN_TYPES = [
+    protected const ALLOWED_TOKEN_TYPES = [
         Token::INCLUDE_KEYWORD_TYPE,
         Token::INCLUDE_VALUE_TYPE,
         Token::WHITESPACE_TYPE,
@@ -30,7 +30,7 @@ class OnlyIncludesInRootRule extends Rule
         Token::EOF_TYPE
     ];
 
-    function process(int $tokenStreamIndex, File $file, int $level): void
+    public function process(int $tokenStreamIndex, File $file, int $level): void
     {
         if (basename($file->getPath()) !== 'Root.fusion') {
             return;

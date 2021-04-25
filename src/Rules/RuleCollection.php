@@ -17,7 +17,7 @@ class RuleCollection implements Iterator
     /**
      * @var array[]
      */
-    protected array $rulesByToken = [];
+    protected $rulesByToken = [];
 
 
     /**
@@ -49,34 +49,26 @@ class RuleCollection implements Iterator
      */
     public function getRulesByTokenType(int $tokenType): array
     {
-        if (isset($this->rulesByToken[$tokenType])) {
-            return $this->rulesByToken[$tokenType];
-        }
-
-        return [];
+        return $this->rulesByToken[$tokenType] ?? [];
     }
 
-    public function current()
+    public function current(): array
     {
         $path = key($this->rulesByToken);
         return $this->rulesByToken[$path];
     }
 
-    public function next()
+    public function next(): void
     {
         next($this->rulesByToken);
     }
 
-    public function valid()
+    public function valid(): bool
     {
-        if (current($this->rulesByToken) === false) {
-            return false;
-        }
-
-        return true;
+        return !(current($this->rulesByToken) === false);
     }
 
-    public function rewind()
+    public function rewind(): void
     {
         reset($this->rulesByToken);
     }

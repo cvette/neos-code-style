@@ -20,7 +20,7 @@ class Filter extends RecursiveFilterIterator
     /**
      * @var string[]
      */
-    protected array $acceptedPaths = [];
+    protected $acceptedPaths = [];
 
 
     /**
@@ -40,10 +40,8 @@ class Filter extends RecursiveFilterIterator
     {
         $filePath = (string)$this->current();
         $realPath = realpath($filePath);
-        if ($realPath !== false) {
-            if (isset($this->acceptedPaths[$realPath]) === true) {
-                return false;
-            }
+        if (($realPath !== false) && isset($this->acceptedPaths[$realPath]) === true) {
+            return false;
         }
 
         if (is_dir($filePath) === false) {
@@ -53,7 +51,7 @@ class Filter extends RecursiveFilterIterator
                 return false;
             }
 
-            if (!in_array(end($fileParts), ['fusion'])) {
+            if (end($fileParts) !== 'fusion') {
                 return false;
             }
         }
@@ -70,7 +68,7 @@ class Filter extends RecursiveFilterIterator
      */
     public function getChildren(): RecursiveIterator
     {
-        $filterClass = get_called_class();
+        $filterClass = static::class;
         return new $filterClass(
             new RecursiveDirectoryIterator((string)$this->current(), (RecursiveDirectoryIterator::SKIP_DOTS | FilesystemIterator::FOLLOW_SYMLINKS))
         );

@@ -18,11 +18,11 @@ class EmptyBlockRule extends Rule
     /**
      * @var int[]
      */
-    protected array $tokenTypes = [
+    protected $tokenTypes = [
         Token::LBRACE_TYPE
     ];
 
-    function process(int $tokenStreamIndex, File $file, int $level): void
+    public function process(int $tokenStreamIndex, File $file, int $level): void
     {
         $nextNonWhitespaceToken = $file->getTokenStream()->findNextNonWhitespaceToken($tokenStreamIndex + 1);
         if ($nextNonWhitespaceToken instanceof Token && $nextNonWhitespaceToken->getType() === Token::RBRACE_TYPE) {

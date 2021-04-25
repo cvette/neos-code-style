@@ -23,13 +23,7 @@ class RunCommand extends Command
 
     protected static $defaultName = 'run';
 
-
-    /**
-     * Configure
-     *
-     * @return void
-     */
-    protected function configure()
+    protected function configure(): void
     {
         $this->addOption('neosRoot', 'nr', InputOption::VALUE_OPTIONAL,'The root directory of a Neos distribution');
         $this->addOption('config','c',InputOption::VALUE_OPTIONAL);
