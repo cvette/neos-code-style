@@ -21,6 +21,9 @@ rules:
   nodeProperties:
     class: 'Vette\Neos\CodeStyle\Rules\Neos\NodePropertiesRule'
     severity: error
+  contextInFirstLevel:
+    class: 'Vette\Neos\CodeStyle\Rules\Neos\ContextInFirstLevelRule'
+    severity: warning
 
 ruleSets:
   default:
@@ -32,6 +35,7 @@ ruleSets:
       - 'onlyIncludesInRootFile'
       - 'prototypeNamePrefix'
       - 'nodeProperties'
+      - 'contextInFirstLevel'
   generic:
     rules: ['operatorSpacing', 'emptyBlock']
 
