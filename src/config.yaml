@@ -27,6 +27,9 @@ rules:
   contextInFirstLevel:
     class: 'Vette\Neos\CodeStyle\Rules\Neos\ContextInFirstLevelRule'
     severity: warning
+  ternaryOperator:
+    class: 'Vette\Neos\CodeStyle\Rules\Neos\TernaryOperatorRule'
+    severity: error
 
 ruleSets:
   default:
@@ -39,6 +42,7 @@ ruleSets:
       - 'prototypeNamePrefix'
       - 'nodeProperties'
       - 'contextInFirstLevel'
+      - 'ternaryOperator'
   generic:
     rules: ['operatorSpacing','blockSpacing', 'emptyBlock']
 
