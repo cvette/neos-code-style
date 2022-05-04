@@ -48,6 +48,7 @@ abstract class FusionRule extends Rule
         // Check if this prototype is being unset or is part of an assignment
         return $this->isFirstOnLine($tokenStreamIndex, $file)
             && $stream->findNextToken($tokenStreamIndex, Token::UNSET_TYPE, Token::LINE_BREAK) === null
-            && $stream->findNextToken($tokenStreamIndex, Token::ASSIGNMENT_TYPE, Token::LINE_BREAK) === null;
+            && $stream->findNextToken($tokenStreamIndex, Token::ASSIGNMENT_TYPE, Token::LINE_BREAK) === null
+            && $stream->findNextToken($tokenStreamIndex, Token::OBJECT_PATH_PART_TYPE, Token::LINE_BREAK) === null;
     }
 }
