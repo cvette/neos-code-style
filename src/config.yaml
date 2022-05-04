@@ -18,6 +18,9 @@ rules:
   operatorSpacing:
     class: 'Vette\Neos\CodeStyle\Rules\Generic\OperatorSpacingRule'
     severity: error
+  blockSpacing:
+    class: 'Vette\Neos\CodeStyle\Rules\Generic\BlockSpacingRule'
+    severity: error
   nodeProperties:
     class: 'Vette\Neos\CodeStyle\Rules\Neos\NodePropertiesRule'
     severity: error
@@ -37,7 +40,7 @@ ruleSets:
       - 'nodeProperties'
       - 'contextInFirstLevel'
   generic:
-    rules: ['operatorSpacing', 'emptyBlock']
+    rules: ['operatorSpacing','blockSpacing', 'emptyBlock']
 
 reports:
   console:
