@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Vette\Neos\CodeStyle\Rules;
 
-use Vette\FusionParser\Token;
 use Vette\Neos\CodeStyle\Files\File;
+use Vette\Neos\CodeStyle\Lexer\Token;
 
 /**
  * Class Rule

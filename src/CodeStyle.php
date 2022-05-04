@@ -9,15 +9,14 @@ use Symfony\Component\Yaml\Yaml;
 use Vette\Neos\CodeStyle\Files\Error;
 use Vette\Neos\CodeStyle\Files\File;
 use Vette\Neos\CodeStyle\Files\FileCollection;
+use Vette\Neos\CodeStyle\Lexer\LexerException;
+use Vette\Neos\CodeStyle\Lexer\Source;
+use Vette\Neos\CodeStyle\Lexer\Token;
+use Vette\Neos\CodeStyle\Lexer\TokenStream;
 use Vette\Neos\CodeStyle\Packages\PackageCollection;
 use Vette\Neos\CodeStyle\Reports\Report;
 use Vette\Neos\CodeStyle\Rules\Rule;
 use Vette\Neos\CodeStyle\Rules\RuleCollection;
-use Vette\FusionParser\Lexer;
-use Vette\FusionParser\LexerException;
-use Vette\FusionParser\Source;
-use Vette\FusionParser\Token;
-use Vette\FusionParser\TokenStream;
 use Exception;
 
 /**
@@ -218,7 +217,7 @@ class CodeStyle
      */
     protected function processFile(File $file): void
     {
-        $lexer = new Lexer(false);
+        $lexer = new Lexer\Lexer(false);
 
         try {
             $source = new Source(file_get_contents($file->getRealPath()), basename($file->getRealPath()), $file->getRealPath());

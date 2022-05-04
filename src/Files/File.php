@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Vette\Neos\CodeStyle\Files;
 
+use Vette\Neos\CodeStyle\Lexer\TokenStream;
 use Vette\Neos\CodeStyle\Packages\Package;
-use Vette\FusionParser\TokenStream;
 
 /**
  * Class File
