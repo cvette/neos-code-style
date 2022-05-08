@@ -21,6 +21,9 @@ rules:
   blockSpacing:
     class: 'Vette\Neos\CodeStyle\Rules\Generic\BlockSpacingRule'
     severity: error
+  eelSpacing:
+    class: 'Vette\Neos\CodeStyle\Rules\Generic\EelSpacingRule'
+    severity: error
   nodeProperties:
     class: 'Vette\Neos\CodeStyle\Rules\Neos\NodePropertiesRule'
     severity: error
@@ -44,7 +47,7 @@ ruleSets:
       - 'contextInFirstLevel'
       - 'ternaryOperator'
   generic:
-    rules: ['operatorSpacing','blockSpacing', 'emptyBlock']
+    rules: ['operatorSpacing','blockSpacing', 'emptyBlock', 'eelSpacing']
 
 reports:
   console:
