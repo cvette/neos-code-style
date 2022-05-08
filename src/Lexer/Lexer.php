@@ -269,17 +269,18 @@ class Lexer
             ],
             self::STATE_EEL_EXPRESSION_FOUND => [
                 self::RBRACE => function (string $text): void {
-                    $this->pushToken(Token::EEL_END_TYPE, $text);
 
                     if ($this->currentEelNestingLevel === 0) {
+                        $this->pushToken(Token::EEL_END_TYPE, $text);
                         $this->popState();
                         $this->popState();
                     } else {
+                        $this->pushToken(Token::EEL_RBRACE_TYPE, $text);
                         $this->currentEelNestingLevel--;
                     }
                 },
                 self::LBRACE => function (string $text): void {
-                    $this->pushToken(Token::EEL_END_TYPE, $text);
+                    $this->pushToken(Token::EEL_LBRACE_TYPE, $text);
                     $this->currentEelNestingLevel++;
                 },
                 self::DOT => function (string $text): void {

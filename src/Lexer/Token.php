@@ -67,30 +67,33 @@ final class Token
     public const EEL_LBRACKET_TYPE = 29;
     public const EEL_RBRACKET_TYPE = 30;
 
-    public const EEL_ADDITION_OPERATOR_TYPE = 31;
-    public const EEL_SUBTRACTION_OPERATOR_TYPE = 32;
-    public const EEL_MULTIPLICATION_OPERATOR_TYPE = 33;
-    public const EEL_DIVISION_OPERATOR_TYPE = 34;
-    public const EEL_MODULO_OPERATOR_TYPE = 35;
-    public const EEL_COMPARISON_OPERATOR_TYPE = 35;
-    public const EEL_NEGATION_OPERATOR_TYPE = 36;
+    public const EEL_LBRACE_TYPE = 31;
+    public const EEL_RBRACE_TYPE = 32;
 
-    public const EEL_IDENTIFIER_TYPE = 37;
-    public const EEL_IDENTIFIER_SEPARATOR_TYPE = 38;
-    public const EEL_VALUE_SEPARATOR_TYPE = 39;
-    public const EEL_DOUBLE_ARROW_TYPE = 40;
+    public const EEL_ADDITION_OPERATOR_TYPE = 33;
+    public const EEL_SUBTRACTION_OPERATOR_TYPE = 34;
+    public const EEL_MULTIPLICATION_OPERATOR_TYPE = 35;
+    public const EEL_DIVISION_OPERATOR_TYPE = 36;
+    public const EEL_MODULO_OPERATOR_TYPE = 37;
+    public const EEL_COMPARISON_OPERATOR_TYPE = 38;
+    public const EEL_NEGATION_OPERATOR_TYPE = 39;
 
-    public const EEL_NULL_VALUE_TYPE = 41;
-    public const EEL_BOOLEAN_VALUE_TYPE = 42;
-    public const EEL_NUMBER_VALUE_TYPE = 43;
-    public const EEL_FLOAT_NUMBER_VALUE_TYPE = 44;
-    public const EEL_STRING_VALUE_TYPE = 45;
+    public const EEL_IDENTIFIER_TYPE = 40;
+    public const EEL_IDENTIFIER_SEPARATOR_TYPE = 41;
+    public const EEL_VALUE_SEPARATOR_TYPE = 42;
+    public const EEL_DOUBLE_ARROW_TYPE = 43;
 
-    public const NULL_VALUE_TYPE = 46;
-    public const BOOLEAN_VALUE_TYPE = 47;
-    public const NUMBER_VALUE_TYPE = 48;
-    public const FLOAT_NUMBER_VALUE_TYPE = 49;
-    public const STRING_VALUE_TYPE = 50;
+    public const EEL_NULL_VALUE_TYPE = 44;
+    public const EEL_BOOLEAN_VALUE_TYPE = 45;
+    public const EEL_NUMBER_VALUE_TYPE = 46;
+    public const EEL_FLOAT_NUMBER_VALUE_TYPE = 47;
+    public const EEL_STRING_VALUE_TYPE = 48;
+
+    public const NULL_VALUE_TYPE = 49;
+    public const BOOLEAN_VALUE_TYPE = 50;
+    public const NUMBER_VALUE_TYPE = 51;
+    public const FLOAT_NUMBER_VALUE_TYPE = 52;
+    public const STRING_VALUE_TYPE = 53;
 
 
     /**
@@ -229,6 +232,9 @@ final class Token
             case self::EEL_END_TYPE:
                 $name = 'EEL_END_TYPE';
                 break;
+            case self::EEL_IDENTIFIER_TYPE:
+                $name = 'EEL_IDENTIFIER_TYPE';
+                break;
             case self::EEL_IF_KEYWORD_TYPE:
                 $name = 'EEL_IF_KEYWORD_TYPE';
                 break;
@@ -262,6 +268,12 @@ final class Token
             case self::EEL_RPAREN_TYPE:
                 $name = 'EEL_RPAREN_TYPE';
                 break;
+            case self::EEL_LBRACE_TYPE:
+                $name = 'EEL_LBRACE_TYPE';
+                break;
+            case self::EEL_RBRACE_TYPE:
+                $name = 'EEL_RBRACE_TYPE';
+                break;
             case self::EEL_MODULO_OPERATOR_TYPE:
                 $name = 'EEL_MODULO_OPERATOR_TYPE';
                 break;
@@ -293,6 +305,9 @@ final class Token
                 $name = 'EEL_VALUE_SEPARATOR_TYPE';
                 break;
             case self::EEL_IF_SEPARATOR_TYPE:
+                $name = 'EEL_IF_SEPARATOR_TYPE';
+                break;
+            case self::DSL_END_TYPE:
                 $name = 'DSL_END_TYPE';
                 break;
             case self::DSL_START_TYPE:
