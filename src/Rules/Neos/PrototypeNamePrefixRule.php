@@ -39,6 +39,10 @@ class PrototypeNamePrefixRule extends FusionRule
             return;
         }
 
+        if (in_array($firstIdentifier->getValue(), $this->getOption('ignorePackages'), true)) {
+            return;
+        }
+
         $prototypeNameParts = explode('.', $prototypeName->getValue());
         if (!in_array(reset($prototypeNameParts), $this->getOption('validPrefixes'))) {
             $file->addError('Prototype name should start with: ' . implode(', ', $this->getOption('validPrefixes')), $firstIdentifier->getLine(), $firstIdentifier->getColumn(), $this->severity);
