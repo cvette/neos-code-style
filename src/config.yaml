@@ -3,6 +3,7 @@ rules:
     class: 'Vette\Neos\CodeStyle\Rules\Neos\PrototypeNamePrefixRule'
     severity: warning
     options:
+      ignorePackages: ['Neos.Neos']
       validPrefixes: ['Content', 'Document', 'Component', 'Helper', 'Presentation', 'Integration']
   onlyIncludesInRootFile:
     class: 'Vette\Neos\CodeStyle\Rules\Neos\OnlyIncludesInRootRule'
