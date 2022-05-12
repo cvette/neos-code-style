@@ -417,6 +417,8 @@ class Lexer
         $this->code = str_replace(["\r\n", "\r"], "\n", $source->getCode());
         $this->end = strlen($this->code);
 
+        $this->tokens[] = new Token(Token::FILE_START_TYPE, '', 0, 0, 0);
+
         while ($this->cursor < $this->end) {
             if ($this->lexState() || $this->lexWhitespace()) {
                 continue;

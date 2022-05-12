@@ -14,8 +14,6 @@ use Vette\Neos\CodeStyle\Files\File;
  */
 abstract class Rule
 {
-    public const FILE_START_TOKEN_TYPE = 99;
-
     /**
      * @var int[]
      */

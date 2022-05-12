@@ -95,6 +95,7 @@ final class Token
     public const FLOAT_NUMBER_VALUE_TYPE = 52;
     public const STRING_VALUE_TYPE = 53;
 
+    public const FILE_START_TYPE = 99;
 
     /**
      * @param int $type The type of the token

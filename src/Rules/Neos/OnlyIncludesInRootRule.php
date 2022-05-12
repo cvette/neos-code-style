@@ -19,7 +19,7 @@ class OnlyIncludesInRootRule extends Rule
      * @var int[]
      */
     protected $tokenTypes = [
-        Rule::FILE_START_TOKEN_TYPE
+        Token::FILE_START_TYPE
     ];
 
     protected const ALLOWED_TOKEN_TYPES = [

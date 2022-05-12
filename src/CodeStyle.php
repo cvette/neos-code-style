@@ -115,7 +115,6 @@ class CodeStyle
     protected function initReport(): void
     {
         $defaultReport = $this->config['defaultReport'];
-        $this->config['reports'][$defaultReport];
 
         if (!isset($this->config['reports'][$defaultReport])) {
             throw new Exception('report is not defined: ' . $defaultReport);
@@ -224,7 +223,7 @@ class CodeStyle
             $tokenStream = $lexer->tokenize($source);
             $file->setTokenStream($tokenStream);
 
-            $this->applyRules($this->ruleCollection, $tokenStream, Rule::FILE_START_TOKEN_TYPE, $file, 0);
+            
 
             $level = 0;
             foreach ($tokenStream as $token) {
