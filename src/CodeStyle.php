@@ -223,10 +223,20 @@ class CodeStyle
             $tokenStream = $lexer->tokenize($source);
             $file->setTokenStream($tokenStream);
 
-            
+
+            $ignoreLineNumber = null;
 
             $level = 0;
             foreach ($tokenStream as $token) {
+                if ($token->getType() === Token::IGNORE_NEXT_LINE_TYPE) {
+                    $ignoreLineNumber = $token->getLine() + 1;
+                    continue;
+                }
+
+                if ($token->getLine() === $ignoreLineNumber) {
+                    continue;
+                }
+
                 $this->applyRules($this->ruleCollection, $tokenStream, $token->getType(), $file, $level);
 
                 // calculate current nesting level

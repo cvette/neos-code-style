@@ -6,6 +6,7 @@ namespace Vette\Neos\CodeStyle\Lexer;
 
 use Closure;
 use LogicException;
+use function Symfony\Polyfill\Php80\Php80;
 
 /**
  * Fusion Lexer
@@ -136,9 +137,15 @@ class Lexer
     {
         $this->stateDefinitions = [
             self::STATE_INITIAL => [
-                self::SINGLE_LINE_COMMENT => static function (): void {
+                self::SINGLE_LINE_COMMENT => function (string $text): void {
+                    if (str_contains($text, '@neoscs-ignore-next-line')) {
+                        $this->pushToken(Token::IGNORE_NEXT_LINE_TYPE, $text);
+                    }
                 },
-                self::MULTI_LINE_COMMENT => static function (): void {
+                self::MULTI_LINE_COMMENT => function (string $text): void {
+                    if (str_contains($text, '@neoscs-ignore-next-line')) {
+                        $this->pushToken(Token::IGNORE_NEXT_LINE_TYPE, $text);
+                    }
                 },
                 self::PROTOTYPE_KEYWORD => function (string $text): bool {
                     if ($this->lookahead(strlen($text), self::LPAREN, false)) {

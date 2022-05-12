@@ -96,6 +96,8 @@ final class Token
     public const STRING_VALUE_TYPE = 53;
 
     public const FILE_START_TYPE = 99;
+    public const IGNORE_NEXT_LINE_TYPE = 100;
+
 
     /**
      * @param int $type The type of the token
