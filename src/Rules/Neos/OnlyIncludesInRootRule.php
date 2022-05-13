@@ -23,6 +23,7 @@ class OnlyIncludesInRootRule extends Rule
     ];
 
     protected const ALLOWED_TOKEN_TYPES = [
+        Token::FILE_START_TYPE,
         Token::INCLUDE_KEYWORD_TYPE,
         Token::INCLUDE_VALUE_TYPE,
         Token::WHITESPACE_TYPE,
