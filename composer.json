@@ -1,6 +1,7 @@
 {
     "name": "vette/neos-code-style",
     "description": "",
+    "license": "MIT",
     "authors": [
         {
             "name": "Christian Vette",
