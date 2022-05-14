@@ -29,10 +29,10 @@ abstract class FusionRule extends Rule
         $prevPrev = $stream->getTokenAt($tokenStreamIndex - 2);
 
         // check if prototype is first token on line
-        return ($prev === null
+        return ($prev->getType() === Token::FILE_START_TYPE
             || $prev->getType() === Token::LINE_BREAK
             || $prev->getType() === Token::WHITESPACE_TYPE
-            && ($prevPrev === null || $prevPrev->getType() === Token::LINE_BREAK));
+            && ($prevPrev === Token::FILE_START_TYPE || $prevPrev->getType() === Token::LINE_BREAK));
     }
 
     /**
