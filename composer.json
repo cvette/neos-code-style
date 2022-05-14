@@ -16,13 +16,16 @@
         "symfony/console": "^5.1",
         "symfony/filesystem": "^5.1",
         "symfony/yaml": "^5.1",
-        "symfony/config": "^5.2"
+        "symfony/config": "^5.2",
+        "php": "^7.3||^8.0"
     },
     "require-dev": {
-        "vimeo/psalm": "^4.6"
+        "vimeo/psalm": "^4.6",
+        "phpunit/phpunit": "^9.5"
     },
     "scripts": {
-        "compile": "box compile"
+        "compile": "box compile",
+        "test": "phpunit tests"
     },
     "bin": [
         "bin/neoscs"
