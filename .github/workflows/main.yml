@@ -11,13 +11,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        php-version:
-          - "8.1"
-          - "8.0"
-          - "7.4"
-          - "7.3"
     steps:
     - uses: actions/checkout@v3
     
@@ -43,8 +36,8 @@ jobs:
       uses: actions/cache@v2.1.2
       with:
           path: ${{ runner.temp }}/.phive
-          key: php-${{ matrix.php-version }}-phive-${{ hashFiles('.phive/phars.xml') }}
-          restore-keys: php-${{ matrix.php-version }}-phive-
+          key: php-phive-${{ hashFiles('.phive/phars.xml') }}
+          restore-keys: php-phive-
 
     - name: Install PHIVE
       uses: szepeviktor/phive@v1
@@ -54,5 +47,13 @@ jobs:
 
     - name: Install box
       run: ${{ github.workspace }}/tools/phive install humbug/box --force-accept-unsigned
+      
+    - name: Build Phar
+      run: ${{ github.workspace }}/tools/box compile
 
-     
+    - name: Upload Phar
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        name: neoscs-phar
+        # A file, directory or wildcard pattern that describes what to upload
+        path:  ${{ github.workspace }}/bin/neoscs.phar
