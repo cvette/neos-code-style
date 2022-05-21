@@ -1,6 +1,6 @@
 {
     "name": "cvette/neos-code-style",
-    "description": "",
+    "description": "Linter for Neos Fusion",
     "license": "MIT",
     "authors": [
         {
@@ -11,6 +11,11 @@
     "autoload": {
         "psr-4": {
             "Vette\\Neos\\CodeStyle\\": "src/"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "7.3"
         }
     },
     "require": {
