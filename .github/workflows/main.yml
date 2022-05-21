@@ -11,6 +11,13 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-version:
+          - "8.1"
+          - "8.0"
+          - "7.4"
+          - "7.3"
     steps:
     - uses: actions/checkout@v3
     
@@ -28,7 +35,24 @@ jobs:
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
+      
     - name: Run test suite
       run: composer run-script test
-    - name: Build phar
-      run: composer run compile
+      
+    - name: Cache tools installed with PHIVE
+      uses: actions/cache@v2.1.2
+      with:
+          path: ${{ runner.temp }}/.phive
+          key: php-${{ matrix.php-version }}-phive-${{ hashFiles('.phive/phars.xml') }}
+          restore-keys: php-${{ matrix.php-version }}-phive-
+
+    - name: Install PHIVE
+      uses: szepeviktor/phive@v1
+      with:
+          home: ${{ runner.temp }}/.phive
+          binPath: ${{ github.workspace }}/tools/phive
+
+    - name: Install box
+      run: ${{ github.workspace }}/tools/phive install humbug/box --force-accept-unsigned
+
+     
