@@ -302,6 +302,9 @@ class Lexer
                 self::IF_SEPARATOR => function (string $text): void {
                     $this->pushToken(Token::EEL_IF_SEPARATOR_TYPE, $text);
                 },
+                self::NUMBER_VALUE => function (string $text): void {
+                    $this->pushToken(Token::EEL_NUMBER_VALUE_TYPE, $text);
+                },
                 self::ADDITION_OPERATOR => function (string $text): void {
                     $this->pushToken(Token::EEL_ADDITION_OPERATOR_TYPE, $text);
                 },
@@ -358,9 +361,6 @@ class Lexer
                 },
                 self::NULL_VALUE => function (string $text): void {
                     $this->pushToken(Token::EEL_NULL_VALUE_TYPE, $text);
-                },
-                self::NUMBER_VALUE => function (string $text): void {
-                    $this->pushToken(Token::EEL_NUMBER_VALUE_TYPE, $text);
                 },
                 self::FLOAT_NUMBER_VALUE => function (string $text): void {
                     $this->pushToken(Token::EEL_FLOAT_NUMBER_VALUE_TYPE, $text);
