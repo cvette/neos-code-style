@@ -45,7 +45,7 @@ jobs:
           binPath: ${{ github.workspace }}/tools/phive
 
     - name: Install box
-      run: ${{ github.workspace }}/tools/phive install humbug/box --force-accept-unsigned --trust-gpg-keys
+      run: ${{ github.workspace }}/tools/phive install humbug/box --trust-gpg-keys 2DF45277AEF09A2F
       
     - name: Build Phar
       run: ${{ github.workspace }}/tools/box compile
