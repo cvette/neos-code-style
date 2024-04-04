@@ -33,14 +33,6 @@ jobs:
       - name: Run test suite
         run: composer run-script test
 
-      - name: Build
-        run: |
-          docker build \
-          --file .docker/Dockerfile \
-          --pull \
-          --no-cache \
-          --tag cvette/neos-code-style:latest .
-
       - name: Cache tools installed with PHIVE
         uses: actions/cache@v2.1.2
         with:
