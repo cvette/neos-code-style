@@ -11,51 +11,62 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Validate composer.json and composer.lock
-      run: composer validate --strict
+      - name: Set default PHP version
+        run: sudo update-alternatives --set php /usr/bin/php8.2
 
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v3
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
+      - uses: actions/checkout@v3
 
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress
-      
-    - name: Run test suite
-      run: composer run-script test
-      
-    - name: Cache tools installed with PHIVE
-      uses: actions/cache@v2.1.2
-      with:
-          path: ${{ runner.temp }}/.phive
-          key: php-phive-${{ hashFiles('.phive/phars.xml') }}
-          restore-keys: php-phive-
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
 
-    - name: Install PHIVE
-      uses: szepeviktor/phive@v1
-      with:
-          home: ${{ runner.temp }}/.phive
-          binPath: ${{ github.workspace }}/tools/phive
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
 
-    - name: Install box
-      run: ${{ github.workspace }}/tools/phive install humbug/box --trust-gpg-keys 2DF45277AEF09A2F
-      
-    - name: Build Phar
-      run: ${{ github.workspace }}/tools/box compile
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
 
-    - name: Upload Phar
-      uses: actions/upload-artifact@v3.1.0
-      with:
-        name: neoscs-phar
-        # A file, directory or wildcard pattern that describes what to upload
-        path:  ${{ github.workspace }}/bin/neoscs.phar
+      - name: Run test suite
+        run: composer run-script test
+
+      - name: Build
+        run: |
+          docker build \
+          --file .docker/Dockerfile \
+          --pull \
+          --no-cache \
+          --tag cvette/neos-code-style:latest .
+
+      - name: Cache tools installed with PHIVE
+        uses: actions/cache@v2.1.2
+        with:
+            path: ${{ runner.temp }}/.phive
+            key: php-phive-${{ hashFiles('.phive/phars.xml') }}
+            restore-keys: php-phive-
+
+      - name: Install PHIVE
+        uses: szepeviktor/phive@v1
+        with:
+            home: ${{ runner.temp }}/.phive
+            binPath: ${{ github.workspace }}/tools/phive
+
+      - name: Install box
+        run: ${{ github.workspace }}/tools/phive install humbug/box --trust-gpg-keys 2DF45277AEF09A2F
+
+      - name: Build Phar
+        run: ${{ github.workspace }}/tools/box compile
+
+      - name: Upload Phar
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          name: neoscs-phar
+          # A file, directory or wildcard pattern that describes what to upload
+          path:  ${{ github.workspace }}/bin/neoscs.phar
   publish-phar:
         runs-on: ubuntu-latest
         name: Publish the PHAR
