@@ -10,9 +10,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: composer:lts
     steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+
       - uses: actions/checkout@v3
 
       - name: Validate composer.json and composer.lock
@@ -36,15 +39,15 @@ jobs:
       - name: Cache tools installed with PHIVE
         uses: actions/cache@v2.1.2
         with:
-            path: ${{ runner.temp }}/.phive
-            key: php-phive-${{ hashFiles('.phive/phars.xml') }}
-            restore-keys: php-phive-
+          path: ${{ runner.temp }}/.phive
+          key: php-phive-${{ hashFiles('.phive/phars.xml') }}
+          restore-keys: php-phive-
 
       - name: Install PHIVE
         uses: szepeviktor/phive@v1
         with:
-            home: ${{ runner.temp }}/.phive
-            binPath: ${{ github.workspace }}/tools/phive
+          home: ${{ runner.temp }}/.phive
+          binPath: ${{ github.workspace }}/tools/phive
 
       - name: Install box
         run: ${{ github.workspace }}/tools/phive install humbug/box --trust-gpg-keys 2DF45277AEF09A2F
@@ -59,19 +62,19 @@ jobs:
           # A file, directory or wildcard pattern that describes what to upload
           path:  ${{ github.workspace }}/bin/neoscs.phar
   publish-phar:
-        runs-on: ubuntu-latest
-        name: Publish the PHAR
-        needs:
-          - 'build'
-        if: github.event_name == 'release'
-        steps:
-          - uses: actions/download-artifact@v3
-            with:
-              name: neoscs-phar
-              path: .
+    runs-on: ubuntu-latest
+    name: Publish the PHAR
+    needs:
+      - 'build'
+    if: github.event_name == 'release'
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: neoscs-phar
+          path: .
 
-          - name: Upload neoscs.phar
-            uses: softprops/action-gh-release@v1
-            with:
-              token: ${{ secrets.GITHUB_TOKEN }}
-              files: neoscs.phar
+      - name: Upload neoscs.phar
+        uses: softprops/action-gh-release@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          files: neoscs.phar
