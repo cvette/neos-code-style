@@ -16,7 +16,7 @@ class File
 {
     protected string $path;
 
-    protected string $realPath;
+    protected string|bool $realPath;
 
     protected ?Package $package;
 
