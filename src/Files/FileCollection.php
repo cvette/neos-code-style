@@ -19,15 +19,12 @@ use Vette\Neos\CodeStyle\Packages\PackageCollection;
  */
 class FileCollection implements Iterator, Countable
 {
-    /**
-     * @var PackageCollection
-     */
-    protected $packageCollection;
+    protected PackageCollection $packageCollection;
 
     /**
      * @var File[]
      */
-    protected $files = [];
+    protected array $files = [];
 
 
     /**
@@ -57,7 +54,7 @@ class FileCollection implements Iterator, Countable
     protected function addPath(string $path): void
     {
         if (is_dir($path)) {
-            $di = new RecursiveDirectoryIterator($path, (RecursiveDirectoryIterator::SKIP_DOTS | FilesystemIterator::FOLLOW_SYMLINKS));
+            $di = new RecursiveDirectoryIterator($path, (FilesystemIterator::SKIP_DOTS | FilesystemIterator::FOLLOW_SYMLINKS));
             $filter   = new Filter($di);
             $iterator = new RecursiveIteratorIterator($filter);
 
@@ -96,7 +93,7 @@ class FileCollection implements Iterator, Countable
         next($this->files);
     }
 
-    public function key()
+    public function key(): int|string|null
     {
         return key($this->files);
     }

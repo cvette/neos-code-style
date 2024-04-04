@@ -13,8 +13,7 @@ use Vette\Neos\CodeStyle\Rules\Rule;
  */
 class ContextInFirstLevelRule extends Rule
 {
-
-    protected $tokenTypes = [
+    protected array $tokenTypes = [
         Token::META_PROPERTY_KEYWORD_TYPE
     ];
 

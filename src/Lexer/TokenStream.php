@@ -15,13 +15,11 @@ use Iterator;
 class TokenStream implements Iterator, Countable
 {
     /** @var Token[] */
-    private $tokens;
+    private array $tokens;
 
-    /** @var Source|null */
-    private $source;
+    private ?Source $source;
 
-    /** @var int */
-    private $pointer;
+    private int $pointer;
 
     const WHITESPACE_TOKEN_TYPES = [Token::WHITESPACE_TYPE, Token::LINE_BREAK];
 

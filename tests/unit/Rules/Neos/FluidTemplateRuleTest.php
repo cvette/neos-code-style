@@ -30,7 +30,7 @@ class FluidTemplateRuleTest extends TestCase
         }
     }
 
-    public function processProvider()
+    public function processProvider(): array
     {
         return [
             'template' => [

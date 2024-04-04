@@ -17,7 +17,7 @@ class RuleCollection implements Iterator
     /**
      * @var array[]
      */
-    protected $rulesByToken = [];
+    protected array $rulesByToken = [];
 
 
     /**
@@ -73,7 +73,7 @@ class RuleCollection implements Iterator
         reset($this->rulesByToken);
     }
 
-    public function key()
+    public function key(): int|string|null
     {
         return key($this->rulesByToken);
     }

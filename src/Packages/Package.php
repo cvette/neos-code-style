@@ -11,20 +11,11 @@ namespace Vette\Neos\CodeStyle\Packages;
  */
 class Package
 {
-    /**
-     * @var string
-     */
-    protected $key;
+    protected string $key;
 
-    /**
-     * @var string
-     */
-    protected $path;
+    protected string $path;
 
-    /**
-     * @var string
-     */
-    protected $realPath;
+    protected string $realPath;
 
 
     /**

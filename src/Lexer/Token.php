@@ -11,20 +11,15 @@ use LogicException;
  */
 final class Token
 {
-    /** @var string  */
-    private $value;
+    private string $value;
 
-    /** @var int  */
-    private $type;
+    private int $type;
 
-    /** @var int  */
-    private $lineno;
+    private int $lineno;
 
-    /** @var int */
-    private $column;
+    private int $column;
 
-    /** @var int */
-    private $offset;
+    private int $offset;
 
     public const EOF_TYPE = -1;
     public const WHITESPACE_TYPE = 0;
@@ -159,169 +154,62 @@ final class Token
      */
     public static function typeToString(int $type, bool $short = false): string
     {
-        switch ($type) {
-            case self::EOF_TYPE:
-                $name = 'EOF_TYPE';
-                break;
-            case self::OBJECT_IDENTIFIER_TYPE:
-                $name = 'OBJECT_IDENTIFIER_TYPE';
-                break;
-            case self::WHITESPACE_TYPE:
-                $name = 'WHITESPACE_TYPE';
-                break;
-            case self::NUMBER_VALUE_TYPE:
-                $name = 'NUMBER_VALUE_TYPE';
-                break;
-            case self::FLOAT_NUMBER_VALUE_TYPE:
-                $name = 'FLOAT_NUMBER_VALUE_TYPE';
-                break;
-            case self::UNSET_TYPE:
-                $name = 'UNSET_TYPE';
-                break;
-            case self::LINE_BREAK:
-                $name = 'LINE_BREAK_TYPE';
-                break;
-            case self::COPY_TYPE:
-                $name = 'COPY_TYPE';
-                break;
-            case self::DOT_TYPE:
-                $name = 'DOT_TYPE';
-                break;
-            case self::COLON_TYPE:
-                $name = 'COLON_TYPE';
-                break;
-            case self::ASSIGNMENT_TYPE:
-                $name = 'ASSIGNMENT_TYPE';
-                break;
-            case self::NULL_VALUE_TYPE:
-                $name = 'NULL_VALUE_TYPE';
-                break;
-            case self::BOOLEAN_VALUE_TYPE:
-                $name = 'BOOLEAN_VALUE_TYPE';
-                break;
-            case self::RBRACE_TYPE:
-                $name = 'RBRACE_TYPE';
-                break;
-            case self::LBRACE_TYPE:
-                $name = 'LBRACE_TYPE';
-                break;
-            case self::RPAREN_TYPE:
-                $name = 'RPAREN_TYPE';
-                break;
-            case self::LPAREN_TYPE:
-                $name = 'LPAREN_TYPE';
-                break;
-            case self::INCLUDE_KEYWORD_TYPE:
-                $name = 'INCLUDE_KEYWORD_TYPE';
-                break;
-            case self::NAMESPACE_KEYWORD_TYPE:
-                $name = 'NAMESPACE_KEYWORD_TYPE';
-                break;
-            case self::PROTOTYPE_KEYWORD_TYPE:
-                $name = 'PROTOTYPE_KEYWORD_TYPE';
-                break;
-            case self::STRING_VALUE_TYPE:
-                $name = 'STRING_VALUE_TYPE';
-                break;
-            case self::OBJECT_PATH_PART_TYPE:
-                $name = 'OBJECT_PATH_PART_TYPE';
-                break;
-            case self::META_PROPERTY_KEYWORD_TYPE:
-                $name = 'META_PROPERTY_KEYWORD_TYPE';
-                break;
-            case self::EEL_START_TYPE:
-                $name = 'EEL_START_TYPE';
-                break;
-            case self::EEL_END_TYPE:
-                $name = 'EEL_END_TYPE';
-                break;
-            case self::EEL_IDENTIFIER_TYPE:
-                $name = 'EEL_IDENTIFIER_TYPE';
-                break;
-            case self::EEL_IF_KEYWORD_TYPE:
-                $name = 'EEL_IF_KEYWORD_TYPE';
-                break;
-            case self::EEL_ADDITION_OPERATOR_TYPE:
-                $name = 'EEL_ADDITION_OPERATOR_TYPE';
-                break;
-            case self::EEL_AND_OPERATOR_TYPE:
-                $name = 'EEL_AND_OPERATOR_TYPE';
-                break;
-            case self::EEL_BOOLEAN_VALUE_TYPE:
-                $name = 'EEL_BOOLEAN_VALUE_TYPE';
-                break;
-            case self::EEL_COMPARISON_OPERATOR_TYPE:
-                $name = 'EEL_COMPARISON_OPERATOR_TYPE';
-                break;
-            case self::EEL_DIVISION_OPERATOR_TYPE:
-                $name = 'EEL_DIVISION_OPERATOR_TYPE';
-                break;
-            case self::EEL_DOUBLE_ARROW_TYPE:
-                $name = 'EEL_DOUBLE_ARROW_TYPE';
-                break;
-            case self::EEL_FLOAT_NUMBER_VALUE_TYPE:
-                $name = 'EEL_FLOAT_NUMBER_VALUE_TYPE';
-                break;
-            case self::EEL_IDENTIFIER_SEPARATOR_TYPE:
-                $name = 'EEL_IDENTIFIER_SEPARATOR_TYPE';
-                break;
-            case self::EEL_LPAREN_TYPE:
-                $name = 'EEL_LPAREN_TYPE';
-                break;
-            case self::EEL_RPAREN_TYPE:
-                $name = 'EEL_RPAREN_TYPE';
-                break;
-            case self::EEL_LBRACE_TYPE:
-                $name = 'EEL_LBRACE_TYPE';
-                break;
-            case self::EEL_RBRACE_TYPE:
-                $name = 'EEL_RBRACE_TYPE';
-                break;
-            case self::EEL_MODULO_OPERATOR_TYPE:
-                $name = 'EEL_MODULO_OPERATOR_TYPE';
-                break;
-            case self::EEL_MULTIPLICATION_OPERATOR_TYPE:
-                $name = 'EEL_MULTIPLICATION_OPERATOR_TYPE';
-                break;
-            case self::EEL_NEGATION_OPERATOR_TYPE:
-                $name = 'EEL_NEGATION_OPERATOR_TYPE';
-                break;
-            case self::EEL_NULL_VALUE_TYPE:
-                $name = 'EEL_NULL_VALUE_TYPE';
-                break;
-            case self::EEL_NUMBER_VALUE_TYPE:
-                $name = 'EEL_NUMBER_VALUE_TYPE';
-                break;
-            case self::EEL_OR_OPERATOR_TYPE:
-                $name = 'EEL_OR_OPERATOR_TYPE';
-                break;
-            case self::EEL_RBRACKET_TYPE:
-                $name = 'EEL_RBRACKET_TYPE';
-                break;
-            case self::EEL_STRING_VALUE_TYPE:
-                $name = 'EEL_STRING_VALUE_TYPE';
-                break;
-            case self::EEL_SUBTRACTION_OPERATOR_TYPE:
-                $name = 'EEL_SUBTRACTION_OPERATOR_TYPE';
-                break;
-            case self::EEL_VALUE_SEPARATOR_TYPE:
-                $name = 'EEL_VALUE_SEPARATOR_TYPE';
-                break;
-            case self::EEL_IF_SEPARATOR_TYPE:
-                $name = 'EEL_IF_SEPARATOR_TYPE';
-                break;
-            case self::DSL_END_TYPE:
-                $name = 'DSL_END_TYPE';
-                break;
-            case self::DSL_START_TYPE:
-                $name = 'DSL_START_TYPE';
-                break;
-            case self::DSL_CODE_TYPE:
-                $name = 'DSL_CODE_TYPE';
-                break;
-            default:
-                throw new LogicException(sprintf('Token of type "%s" does not exist.', $type));
-        }
+        $name = match ($type) {
+            self::EOF_TYPE => 'EOF_TYPE',
+            self::OBJECT_IDENTIFIER_TYPE => 'OBJECT_IDENTIFIER_TYPE',
+            self::WHITESPACE_TYPE => 'WHITESPACE_TYPE',
+            self::NUMBER_VALUE_TYPE => 'NUMBER_VALUE_TYPE',
+            self::FLOAT_NUMBER_VALUE_TYPE => 'FLOAT_NUMBER_VALUE_TYPE',
+            self::UNSET_TYPE => 'UNSET_TYPE',
+            self::LINE_BREAK => 'LINE_BREAK_TYPE',
+            self::COPY_TYPE => 'COPY_TYPE',
+            self::DOT_TYPE => 'DOT_TYPE',
+            self::COLON_TYPE => 'COLON_TYPE',
+            self::ASSIGNMENT_TYPE => 'ASSIGNMENT_TYPE',
+            self::NULL_VALUE_TYPE => 'NULL_VALUE_TYPE',
+            self::BOOLEAN_VALUE_TYPE => 'BOOLEAN_VALUE_TYPE',
+            self::RBRACE_TYPE => 'RBRACE_TYPE',
+            self::LBRACE_TYPE => 'LBRACE_TYPE',
+            self::RPAREN_TYPE => 'RPAREN_TYPE',
+            self::LPAREN_TYPE => 'LPAREN_TYPE',
+            self::INCLUDE_KEYWORD_TYPE => 'INCLUDE_KEYWORD_TYPE',
+            self::NAMESPACE_KEYWORD_TYPE => 'NAMESPACE_KEYWORD_TYPE',
+            self::PROTOTYPE_KEYWORD_TYPE => 'PROTOTYPE_KEYWORD_TYPE',
+            self::STRING_VALUE_TYPE => 'STRING_VALUE_TYPE',
+            self::OBJECT_PATH_PART_TYPE => 'OBJECT_PATH_PART_TYPE',
+            self::META_PROPERTY_KEYWORD_TYPE => 'META_PROPERTY_KEYWORD_TYPE',
+            self::EEL_START_TYPE => 'EEL_START_TYPE',
+            self::EEL_END_TYPE => 'EEL_END_TYPE',
+            self::EEL_IDENTIFIER_TYPE => 'EEL_IDENTIFIER_TYPE',
+            self::EEL_IF_KEYWORD_TYPE => 'EEL_IF_KEYWORD_TYPE',
+            self::EEL_ADDITION_OPERATOR_TYPE => 'EEL_ADDITION_OPERATOR_TYPE',
+            self::EEL_AND_OPERATOR_TYPE => 'EEL_AND_OPERATOR_TYPE',
+            self::EEL_BOOLEAN_VALUE_TYPE => 'EEL_BOOLEAN_VALUE_TYPE',
+            self::EEL_COMPARISON_OPERATOR_TYPE => 'EEL_COMPARISON_OPERATOR_TYPE',
+            self::EEL_DIVISION_OPERATOR_TYPE => 'EEL_DIVISION_OPERATOR_TYPE',
+            self::EEL_DOUBLE_ARROW_TYPE => 'EEL_DOUBLE_ARROW_TYPE',
+            self::EEL_FLOAT_NUMBER_VALUE_TYPE => 'EEL_FLOAT_NUMBER_VALUE_TYPE',
+            self::EEL_IDENTIFIER_SEPARATOR_TYPE => 'EEL_IDENTIFIER_SEPARATOR_TYPE',
+            self::EEL_LPAREN_TYPE => 'EEL_LPAREN_TYPE',
+            self::EEL_RPAREN_TYPE => 'EEL_RPAREN_TYPE',
+            self::EEL_LBRACE_TYPE => 'EEL_LBRACE_TYPE',
+            self::EEL_RBRACE_TYPE => 'EEL_RBRACE_TYPE',
+            self::EEL_MODULO_OPERATOR_TYPE => 'EEL_MODULO_OPERATOR_TYPE',
+            self::EEL_MULTIPLICATION_OPERATOR_TYPE => 'EEL_MULTIPLICATION_OPERATOR_TYPE',
+            self::EEL_NEGATION_OPERATOR_TYPE => 'EEL_NEGATION_OPERATOR_TYPE',
+            self::EEL_NULL_VALUE_TYPE => 'EEL_NULL_VALUE_TYPE',
+            self::EEL_NUMBER_VALUE_TYPE => 'EEL_NUMBER_VALUE_TYPE',
+            self::EEL_OR_OPERATOR_TYPE => 'EEL_OR_OPERATOR_TYPE',
+            self::EEL_RBRACKET_TYPE => 'EEL_RBRACKET_TYPE',
+            self::EEL_STRING_VALUE_TYPE => 'EEL_STRING_VALUE_TYPE',
+            self::EEL_SUBTRACTION_OPERATOR_TYPE => 'EEL_SUBTRACTION_OPERATOR_TYPE',
+            self::EEL_VALUE_SEPARATOR_TYPE => 'EEL_VALUE_SEPARATOR_TYPE',
+            self::EEL_IF_SEPARATOR_TYPE => 'EEL_IF_SEPARATOR_TYPE',
+            self::DSL_END_TYPE => 'DSL_END_TYPE',
+            self::DSL_START_TYPE => 'DSL_START_TYPE',
+            self::DSL_CODE_TYPE => 'DSL_CODE_TYPE',
+            default => throw new LogicException(sprintf('Token of type "%s" does not exist.', $type)),
+        };
 
         return $short ? $name : 'Fusion\Token::' . $name;
     }

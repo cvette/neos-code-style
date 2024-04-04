@@ -20,7 +20,7 @@ class Filter extends RecursiveFilterIterator
     /**
      * @var string[]
      */
-    protected $acceptedPaths = [];
+    protected array $acceptedPaths = [];
 
 
     /**
@@ -64,13 +64,13 @@ class Filter extends RecursiveFilterIterator
     /**
      * Returns an iterator for the current entry.
      *
-     * @return RecursiveIterator
+     * @return RecursiveFilterIterator|null
      */
-    public function getChildren(): RecursiveIterator
+    public function getChildren(): ?RecursiveFilterIterator
     {
         $filterClass = static::class;
         return new $filterClass(
-            new RecursiveDirectoryIterator((string)$this->current(), (RecursiveDirectoryIterator::SKIP_DOTS | FilesystemIterator::FOLLOW_SYMLINKS))
+            new RecursiveDirectoryIterator((string)$this->current(), (FilesystemIterator::SKIP_DOTS | FilesystemIterator::FOLLOW_SYMLINKS))
         );
     }
 }

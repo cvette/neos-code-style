@@ -4,7 +4,12 @@ declare(strict_types=1);
 
 namespace Vette\Neos\CodeStyle;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\Config\Definition\Builder\NodeBuilder;
+use Symfony\Component\Config\Definition\Builder\NodeDefinition;
+use Symfony\Component\Config\Definition\Builder\NodeParentInterface;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\Builder\VariableNodeDefinition;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
@@ -62,7 +67,7 @@ class CodeStyleConfiguration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    public function addOptionsNode()
+    public function addOptionsNode(): ArrayNodeDefinition|VariableNodeDefinition|NodeDefinition|NodeBuilder|NodeParentInterface|null
     {
         $treeBuilder = new TreeBuilder('options');
         return $treeBuilder->getRootNode()

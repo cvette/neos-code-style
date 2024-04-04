@@ -15,25 +15,13 @@ class Error
     public const SEVERITY_WARNING = 'warning';
     public const SEVERITY_ERROR = 'error';
 
-    /**
-     * @var string
-     */
-    protected $message;
+    protected string $message;
 
-    /**
-     * @var int
-     */
-    protected $lineNumber;
+    protected int $lineNumber;
 
-    /**
-     * @var int
-     */
-    protected $column;
+    protected int $column;
 
-    /**
-     * @var string
-     */
-    protected $severity;
+    protected string $severity;
 
 
     /**

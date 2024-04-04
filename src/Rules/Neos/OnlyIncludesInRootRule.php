@@ -18,7 +18,7 @@ class OnlyIncludesInRootRule extends Rule
     /**
      * @var int[]
      */
-    protected $tokenTypes = [
+    protected array $tokenTypes = [
         Token::FILE_START_TYPE
     ];
 

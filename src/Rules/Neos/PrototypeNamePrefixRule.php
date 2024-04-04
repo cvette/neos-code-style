@@ -19,7 +19,7 @@ class PrototypeNamePrefixRule extends FusionRule
     /**
      * @var int[]
      */
-    protected $tokenTypes = [
+    protected array $tokenTypes = [
         Token::PROTOTYPE_KEYWORD_TYPE
     ];
 

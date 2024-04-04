@@ -20,7 +20,7 @@ class NodePropertiesRule extends FusionRule
     /**
      * @var int[]
      */
-    protected $tokenTypes = [
+    protected array $tokenTypes = [
         Token::EEL_IDENTIFIER_TYPE
     ];
 

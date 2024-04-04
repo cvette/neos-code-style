@@ -18,7 +18,7 @@ class OperatorSpacingRule extends Rule
     /**
      * @var int[]
      */
-    protected $tokenTypes = [
+    protected array $tokenTypes = [
         Token::ASSIGNMENT_TYPE,
         Token::COPY_TYPE,
         Token::EEL_AND_OPERATOR_TYPE,
@@ -27,7 +27,8 @@ class OperatorSpacingRule extends Rule
         Token::EEL_SUBTRACTION_OPERATOR_TYPE,
         Token::EEL_MULTIPLICATION_OPERATOR_TYPE,
         Token::EEL_DIVISION_OPERATOR_TYPE,
-        Token::EEL_MODULO_OPERATOR_TYPE
+        Token::EEL_MODULO_OPERATOR_TYPE,
+        Token::EEL_COMPARISON_OPERATOR_TYPE
     ];
 
     public function process(int $tokenStreamIndex, File $file, int $level): void
@@ -35,7 +36,6 @@ class OperatorSpacingRule extends Rule
         $previous = $file->getTokenStream()->getTokenAt($tokenStreamIndex - 1);
         $next = $file->getTokenStream()->getTokenAt($tokenStreamIndex + 1);
         $current = $file->getTokenStream()->getTokenAt($tokenStreamIndex);
-
         if ($previous !== null && ($previous->getType() !== Token::WHITESPACE_TYPE || strlen($previous->getValue()) > 1)) {
             $error = 'Expecting exactly 1 space before operator';
             $file->addError($error, $current->getLine(), $current->getColumn(), $this->severity);

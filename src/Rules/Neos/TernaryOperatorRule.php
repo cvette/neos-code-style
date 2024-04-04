@@ -16,7 +16,7 @@ class TernaryOperatorRule extends Rule
     /**
      * @var int[]
      */
-    protected $tokenTypes = [
+    protected array $tokenTypes = [
         Token::EEL_IF_KEYWORD_TYPE
     ];
 

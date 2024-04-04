@@ -26,30 +26,15 @@ use Exception;
  */
 class CodeStyle
 {
-    /**
-     * @var FileCollection
-     */
-    protected $fileCollection;
+    protected FileCollection $fileCollection;
 
-    /**
-     * @var PackageCollection
-     */
-    protected $packageCollection;
+    protected PackageCollection $packageCollection;
 
-    /**
-     * @var RuleCollection
-     */
-    protected $ruleCollection;
+    protected RuleCollection $ruleCollection;
 
-    /**
-     * @var Report
-     */
-    protected $report;
+    protected Report $report;
 
-    /**
-     * @var array
-     */
-    protected $config;
+    protected array $config;
 
     /**
      * CodeStyle constructor.

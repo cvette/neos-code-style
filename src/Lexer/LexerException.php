@@ -13,11 +13,9 @@ use LogicException;
  */
 class LexerException extends LogicException
 {
-    /** @var string */
-    protected $character;
+    protected string $character;
 
-    /** @var int */
-    protected $position;
+    protected int $position;
 
 
     /**

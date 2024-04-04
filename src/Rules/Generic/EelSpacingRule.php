@@ -18,7 +18,7 @@ class EelSpacingRule extends Rule
     /**
      * @var int[]
      */
-    protected $tokenTypes = [
+    protected array $tokenTypes = [
         Token::EEL_START_TYPE,
         Token::EEL_END_TYPE
     ];

@@ -14,30 +14,18 @@ use Vette\Neos\CodeStyle\Packages\Package;
  */
 class File
 {
-    /**
-     * @var string
-     */
-    protected $path;
+    protected string $path;
 
-    /**
-     * @var string
-     */
-    protected $realPath;
+    protected string $realPath;
 
-    /**
-     * @var Package|null
-     */
-    protected $package;
+    protected ?Package $package;
 
-    /**
-     * @var TokenStream
-     */
-    protected $tokenStream;
+    protected TokenStream $tokenStream;
 
     /**
      * @var Error[]
      */
-    protected $errors = [];
+    protected array $errors = [];
 
 
     /**

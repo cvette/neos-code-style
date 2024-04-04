@@ -17,14 +17,11 @@ abstract class Rule
     /**
      * @var int[]
      */
-    protected $tokenTypes;
+    protected array $tokenTypes;
 
-    /**
-     * @var array
-     */
-    protected $options;
+    protected array $options;
 
-    protected $severity = Error::SEVERITY_INFO;
+    protected string $severity = Error::SEVERITY_INFO;
 
 
     /**
@@ -41,7 +38,7 @@ abstract class Rule
      * @param string $key
      * @return mixed|null
      */
-    public function getOption(string $key)
+    public function getOption(string $key): mixed
     {
         return $this->options[$key] ?? null;
     }

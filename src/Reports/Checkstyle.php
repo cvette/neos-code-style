@@ -17,7 +17,7 @@ class Checkstyle extends Report
     /**
      * @var string[]
      */
-    protected $fileReports = [];
+    protected array $fileReports = [];
 
 
     /**
@@ -53,11 +53,11 @@ class Checkstyle extends Report
      */
     protected function formatErrorSeverity(string $severity): string
     {
-        switch ($severity) {
-            case Error::SEVERITY_WARNING: return 'WARN';
-            case Error::SEVERITY_ERROR: return 'ERROR';
-            default: return 'INFO';
-        }
+        return match ($severity) {
+            Error::SEVERITY_WARNING => 'WARN',
+            Error::SEVERITY_ERROR => 'ERROR',
+            default => 'INFO',
+        };
     }
 
     /**

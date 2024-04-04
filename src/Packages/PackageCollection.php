@@ -17,7 +17,7 @@ class PackageCollection implements Iterator
     /**
      * @var Package[]
      */
-    protected $packages = [];
+    protected array $packages = [];
 
 
     /**
@@ -31,7 +31,6 @@ class PackageCollection implements Iterator
             $path = implode(DIRECTORY_SEPARATOR, [$neosRoot, 'Data', 'Temporary', 'PackageInformationCache.php']);
             $packagesPath = implode(DIRECTORY_SEPARATOR, [$neosRoot, 'Packages']);
             if (is_file($path)) {
-                /** @noinspection PhpIncludeInspection */
                 $packageCache = include $path;
                 foreach ($packageCache['packages'] as $package) {
                     $packagePath = implode(DIRECTORY_SEPARATOR, [$packagesPath, $package['packagePath']]);
@@ -88,7 +87,7 @@ class PackageCollection implements Iterator
         reset($this->packages);
     }
 
-    public function key()
+    public function key(): int|string|null
     {
         return key($this->packages);
     }

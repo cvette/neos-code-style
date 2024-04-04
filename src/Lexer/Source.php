@@ -11,14 +11,11 @@ namespace Vette\Neos\CodeStyle\Lexer;
  */
 final class Source
 {
-    /** @var string */
-    private $code;
+    private string $code;
 
-    /** @var string */
-    private $name;
+    private string $name;
 
-    /** @var string */
-    private $path;
+    private string $path;
 
 
     /**

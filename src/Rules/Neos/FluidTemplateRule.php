@@ -18,7 +18,7 @@ class FluidTemplateRule extends Rule
     /**
      * @var int[]
      */
-    protected $tokenTypes = [
+    protected array $tokenTypes = [
         Token::OBJECT_IDENTIFIER_TYPE
     ];
 

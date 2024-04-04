@@ -2,7 +2,6 @@
 
 namespace Vette\Neos\CodeStyle\Rules\Generic;
 
-use PhpParser\Parser\Tokens;
 use PHPUnit\Framework\TestCase;
 use Vette\Neos\CodeStyle\Files\File;
 use Vette\Neos\CodeStyle\Lexer\Token;

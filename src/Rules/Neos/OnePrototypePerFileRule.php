@@ -18,14 +18,14 @@ class OnePrototypePerFileRule extends FusionRule
     /**
      * @var int[]
      */
-    protected $tokenTypes = [
+    protected array $tokenTypes = [
         Token::PROTOTYPE_KEYWORD_TYPE
     ];
 
     /**
      * @var bool[]
      */
-    protected $prototypesPerFile = [];
+    protected array $prototypesPerFile = [];
 
 
     public function process(int $tokenStreamIndex, File $file, int $level): void

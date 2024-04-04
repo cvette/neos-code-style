@@ -6,7 +6,6 @@ namespace Vette\Neos\CodeStyle\Lexer;
 
 use Closure;
 use LogicException;
-use function Symfony\Polyfill\Php80\Php80;
 
 /**
  * Fusion Lexer
@@ -86,37 +85,29 @@ class Lexer
     private const STRING_VALUE = '/"([^"\\\\]*(?>\\\\.[^"\\\\]*)*)"|\'([^\'\\\\]*(?>\\\\.[^\'\\\\]*)*)\'/A';
 
     /** @var array<int> */
-    protected $states = [];
+    protected array $states = [];
 
-    /** @var int */
-    protected $state = self::STATE_INITIAL;
+    protected int $state = self::STATE_INITIAL;
 
-    /** @var int */
-    protected $cursor = 0;
+    protected int $cursor = 0;
 
-    /** @var int */
-    protected $lineNumber = 1;
+    protected int $lineNumber = 1;
 
     /** @var array<Token> */
-    protected $tokens = [];
+    protected array $tokens = [];
 
-    /** @var int */
-    protected $end = 0;
+    protected int $end = 0;
 
-    /** @var Source */
-    protected $source;
+    protected Source $source;
 
-    /** @var string */
-    protected $code = '';
+    protected string $code = '';
 
     /** @var array<array<Closure>> */
-    protected $stateDefinitions = [];
+    protected array $stateDefinitions = [];
 
-    /** @var bool */
-    protected $ignoreWhitespace = true;
+    protected bool $ignoreWhitespace = true;
 
-    /** @var int */
-    protected $currentEelNestingLevel = 0;
+    protected int $currentEelNestingLevel = 0;
 
 
     /**
