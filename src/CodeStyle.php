@@ -66,6 +66,10 @@ class CodeStyle
             $this->config['files'] = $parameters->getFiles();
         }
 
+        if (!empty($parameters->getIncludes())) {
+            $this->config['includes'] = $parameters->getIncludes();
+        }
+
         if ($parameters->getNeosRoot()) {
             $this->config['neosRoot'] = $parameters->getNeosRoot();
         }
@@ -83,6 +87,7 @@ class CodeStyle
         $this->packageCollection = new PackageCollection($this->config['neosRoot']);
         $this->fileCollection = new FileCollection($this->config['files'], $this->packageCollection);
 
+        $this->loadIncludes();
         $this->initRules();
         $this->initReport();
 
@@ -252,6 +257,18 @@ class CodeStyle
         $rules = $ruleCollection->getRulesByTokenType($tokenType);
         foreach ($rules as $rule) {
             $rule->process($tokenStream->getPointer(), $file, $level);
+        }
+    }
+
+    protected function loadIncludes(): void
+    {
+        if (isset($this->config['includes'])) {
+            foreach ($this->config['includes'] as $include) {
+                if (!file_exists($include)) {
+                    throw new \RuntimeException('include file does not exist: ' . $include);
+                }
+                require($include);
+            }
         }
     }
 }

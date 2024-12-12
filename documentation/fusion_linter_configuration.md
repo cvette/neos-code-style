@@ -240,3 +240,58 @@ ${condition ? 'true' : 'false'} // Correct usage
 ${condition1 ? 'true' : (condition2 ? 'nestedTrue' : 'nestedFalse')} // Error
 
 ````
+
+## Custom rules
+
+You can add additional rules in the configuration, by adding them to the `includes`:
+
+```yaml
+includes:
+  - DistributionPackages/My.Package/Classes/CodeStyle/MyRule.php
+```
+
+The rule class should extend `Vette\Neos\CodeStyle\Rules\Rule` and implement the `process` method:
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace My\Package\CodeStyle;
+
+use Vette\Neos\CodeStyle\Lexer\Token;
+use Vette\Neos\CodeStyle\Files\File;
+use Vette\Neos\CodeStyle\Rules\Rule;
+
+class MyRule extends Rule
+{
+    protected array $tokenTypes = [
+        Token::OBJECT_IDENTIFIER_TYPE
+    ];
+
+    public function process(int $tokenStreamIndex, File $file, int $level): void
+    {
+        $isPresentationComponent = str_contains($file->getPath(), 'Presentation');
+
+        $namespace = $file->getTokenStream()->getTokenAt($tokenStreamIndex);
+        $colon = $file->getTokenStream()->getTokenAt($tokenStreamIndex + 1);
+        $identifier = $file->getTokenStream()->getTokenAt($tokenStreamIndex + 2);
+
+        if ($isPresentationComponent
+            && $colon instanceof Token
+            && $colon->getType() === Token::COLON_TYPE
+            && $identifier instanceof Token
+            && $identifier->getType() === Token::OBJECT_IDENTIFIER_TYPE
+            && $identifier->getValue() === 'ContentComponent'
+            && $namespace instanceof Token
+            && $namespace->getValue() === 'Neos.Neos') {
+            $file->addError(
+                'A presentation component must not be Neos.Neos:ContentComponent',
+                $namespace->getLine(),
+                $namespace->getColumn(),
+                $this->severity
+            );
+        }
+    }
+}
+```

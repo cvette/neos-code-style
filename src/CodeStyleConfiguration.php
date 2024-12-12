@@ -35,6 +35,7 @@ class CodeStyleConfiguration implements ConfigurationInterface
                 ->scalarNode('defaultReport')->end()
                 ->scalarNode('neosRoot')->end()
                 ->arrayNode('files')->prototype('scalar')->end()->end()
+                ->arrayNode('includes')->prototype('scalar')->end()->end()
                 ->arrayNode('reports')
                     ->useAttributeAsKey('name')
                         ->arrayPrototype()
