@@ -24,11 +24,11 @@ class CodeStyleConfiguration implements ConfigurationInterface
      * @inheritDoc
      *
      * @psalm-suppress PossiblyUndefinedMethod
+     * @psalm-suppress PossiblyNullReference
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('codeStyle');
-
         /** @var ArrayNodeDefinition $rootNode */
         $rootNode = $treeBuilder->getRootNode();
         $rootNode

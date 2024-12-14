@@ -23,10 +23,10 @@
         }
     },
     "require": {
-        "symfony/console": "^5.1",
-        "symfony/filesystem": "^5.1",
-        "symfony/yaml": "^5.1",
-        "symfony/config": "^5.2",
+        "symfony/console": "^6.4",
+        "symfony/filesystem": "^6.4",
+        "symfony/yaml": "^6.4",
+        "symfony/config": "^6.4",
         "php": "^8.1"
     },
     "require-dev": {

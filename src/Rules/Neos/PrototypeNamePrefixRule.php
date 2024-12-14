@@ -16,9 +16,7 @@ use Vette\Neos\CodeStyle\Rules\FusionRule;
 class PrototypeNamePrefixRule extends FusionRule
 {
 
-    /**
-     * @var int[]
-     */
+    /** @var array<int> */
     protected array $tokenTypes = [
         Token::PROTOTYPE_KEYWORD_TYPE
     ];
@@ -34,18 +32,18 @@ class PrototypeNamePrefixRule extends FusionRule
         $firstIdentifier = $stream->findNextToken($tokenStreamIndex + 1, Token::OBJECT_IDENTIFIER_TYPE, Token::RPAREN_TYPE);
         $secondIdentifier = $stream->findNextToken($tokenStreamIndex + 3, Token::OBJECT_IDENTIFIER_TYPE, Token::RPAREN_TYPE);
 
-        $prototypeName = $secondIdentifier ?: $firstIdentifier;
-        if ($prototypeName === null) {
+        if ($firstIdentifier === null) {
             return;
         }
 
-        if (in_array($firstIdentifier->getValue(), $this->getOption('ignorePackages'), true)) {
+        $prototypeName = $secondIdentifier ?: $firstIdentifier;
+        if (in_array($firstIdentifier->getValue(), $this->getOption('ignorePackages') ?? [], true)) {
             return;
         }
 
         $prototypeNameParts = explode('.', $prototypeName->getValue());
-        if (!in_array(reset($prototypeNameParts), $this->getOption('validPrefixes'))) {
-            $file->addError('Prototype name should start with: ' . implode(', ', $this->getOption('validPrefixes')), $firstIdentifier->getLine(), $firstIdentifier->getColumn(), $this->severity);
+        if (!in_array(reset($prototypeNameParts), $this->getOption('validPrefixes') ?? [])) {
+            $file->addError('Prototype name should start with: ' . implode(', ', $this->getOption('validPrefixes') ?? []), $firstIdentifier->getLine(), $firstIdentifier->getColumn(), $this->severity);
         }
     }
 }

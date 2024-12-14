@@ -32,6 +32,8 @@ class PackageCollection implements Iterator
             $packagesPath = implode(DIRECTORY_SEPARATOR, [$neosRoot, 'Packages']);
             if (is_file($path)) {
                 $packageCache = include $path;
+
+                /** @var array $package */
                 foreach ($packageCache['packages'] as $package) {
                     $packagePath = implode(DIRECTORY_SEPARATOR, [$packagesPath, $package['packagePath']]);
                     $realPackagePath = realpath($packagePath);

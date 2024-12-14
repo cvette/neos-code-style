@@ -27,7 +27,11 @@ class BlockSpacingRule extends Rule
         $previous = $file->getTokenStream()->getTokenAt($tokenStreamIndex - 1);
         $current = $file->getTokenStream()->getTokenAt($tokenStreamIndex);
 
-        if ($previous !== null && ($previous->getType() !== Token::WHITESPACE_TYPE || strlen($previous->getValue()) > 1)) {
+        if ($previous === null || $current === null) {
+            return;
+        }
+
+        if ($previous->getType() !== Token::WHITESPACE_TYPE || strlen($previous->getValue()) > 1) {
             $error = 'Expecting exactly 1 space before opening brace';
             $file->addError($error, $current->getLine(), $current->getColumn(), $this->severity);
         }

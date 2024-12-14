@@ -15,7 +15,7 @@ class RuleCollection implements Iterator
 {
 
     /**
-     * @var array[]
+     * @var array<int, array<Rule>>
      */
     protected array $rulesByToken = [];
 
@@ -29,7 +29,6 @@ class RuleCollection implements Iterator
 
     /**
      * @param Rule $rule
-     *
      * @return void
      */
     public function addRule(Rule $rule): void
@@ -43,15 +42,13 @@ class RuleCollection implements Iterator
         }
     }
 
-    /**
-     * @param int $tokenType
-     * @return Rule[]
-     */
+    /** @return array<Rule> */
     public function getRulesByTokenType(int $tokenType): array
     {
         return $this->rulesByToken[$tokenType] ?? [];
     }
 
+    /** @return array<Rule> */
     public function current(): array
     {
         $path = key($this->rulesByToken);

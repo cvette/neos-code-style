@@ -28,13 +28,19 @@ class NodePropertiesRule extends FusionRule
     public function process(int $tokenStreamIndex, File $file, int $level): void
     {
         $identifierToken = $file->getTokenStream()->getTokenAt($tokenStreamIndex);
+        if ($identifierToken === null) {
+            return;
+        }
+
         if (in_array($identifierToken->getValue(),self::EEL_IDENTIFIER_VALUES)) {
             $nextToken = $file->getTokenStream()->findNextNonWhitespaceToken($tokenStreamIndex + 1);
-            if ($nextToken->getType() === Token::EEL_IDENTIFIER_SEPARATOR_TYPE) {
-                $nextToken = $file->getTokenStream()->findNextNonWhitespaceToken($tokenStreamIndex + 2);
-                if ($nextToken->getType() === Token::EEL_IDENTIFIER_TYPE && $nextToken->getValue() === 'properties') {
-                    $file->addError('Node properties should only be accessed individually via "q(node).property()"', $identifierToken->getLine(), $identifierToken->getColumn(), $this->severity);
-                }
+            if ($nextToken?->getType() !== Token::EEL_IDENTIFIER_SEPARATOR_TYPE) {
+                return;
+            }
+
+            $nextToken = $file->getTokenStream()->findNextNonWhitespaceToken($tokenStreamIndex + 2);
+            if ($nextToken?->getType() === Token::EEL_IDENTIFIER_TYPE && $nextToken?->getValue() === 'properties') {
+                $file->addError('Node properties should only be accessed individually via "q(node).property()"', $identifierToken->getLine(), $identifierToken->getColumn(), $this->severity);
             }
         }
     }

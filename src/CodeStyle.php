@@ -181,6 +181,8 @@ class CodeStyle
     {
         $rules = array_merge($this->config['ruleSets'][$ruleSet]['rules'], $rules);
         $includes = $this->config['ruleSets'][$ruleSet]['include'];
+
+        /** @var string $include */
         foreach ($includes as $include) {
             if (!isset($this->config['ruleSets'][$include])) {
                 throw new Exception('unknown ruleset: ' . $include);
@@ -263,6 +265,7 @@ class CodeStyle
     protected function loadIncludes(): void
     {
         if (isset($this->config['includes'])) {
+            /** @var string $include */
             foreach ($this->config['includes'] as $include) {
                 if (!file_exists($include)) {
                     throw new \RuntimeException('include file does not exist: ' . $include);

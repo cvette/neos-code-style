@@ -38,12 +38,12 @@ class OperatorSpacingRule extends Rule
         $current = $file->getTokenStream()->getTokenAt($tokenStreamIndex);
         if ($previous !== null && ($previous->getType() !== Token::WHITESPACE_TYPE || strlen($previous->getValue()) > 1)) {
             $error = 'Expecting exactly 1 space before operator';
-            $file->addError($error, $current->getLine(), $current->getColumn(), $this->severity);
+            $file->addError($error, $current?->getLine() ?? 0, $current?->getColumn() ?? 0, $this->severity);
         }
 
         if ($next !== null && ($next->getType() !== Token::WHITESPACE_TYPE || strlen($next->getValue()) > 1)) {
             $error = 'Expecting exactly 1 space after operator';
-            $file->addError($error, $current->getLine(), $current->getColumn(), $this->severity);
+            $file->addError($error, $current?->getLine() ?? 0, $current?->getColumn() ?? 0, $this->severity);
         }
     }
 }

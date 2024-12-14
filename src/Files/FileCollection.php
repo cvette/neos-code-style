@@ -22,7 +22,7 @@ class FileCollection implements Iterator, Countable
     protected PackageCollection $packageCollection;
 
     /**
-     * @var File[]
+     * @var array<File>
      */
     protected array $files = [];
 
@@ -30,14 +30,14 @@ class FileCollection implements Iterator, Countable
     /**
      * FileCollection constructor.
      *
-     * @param array $files
+     * @param array<string> $filePaths
      * @param PackageCollection $packageCollection
      */
-    public function __construct(array $files, PackageCollection $packageCollection)
+    public function __construct(array $filePaths, PackageCollection $packageCollection)
     {
         $this->packageCollection = $packageCollection;
 
-        foreach ($files as $path) {
+        foreach ($filePaths as $path) {
             $this->addPath($path);
         }
 

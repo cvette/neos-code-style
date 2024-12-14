@@ -14,9 +14,7 @@ use Vette\Neos\CodeStyle\Files\File;
  */
 abstract class Rule
 {
-    /**
-     * @var int[]
-     */
+    /** @var array<int> */
     protected array $tokenTypes;
 
     protected array $options;
