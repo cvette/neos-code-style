@@ -54,11 +54,11 @@ class CodeStyle
         $processor = new Processor();
         $this->config = $processor->processConfiguration(new CodeStyleConfiguration(), $configFiles);
 
-        if ($parameters->getRuleset()) {
+        if (!empty($parameters->getRuleset())) {
             $this->config['defaultRuleSet'] = $parameters->getRuleset();
         }
 
-        if ($parameters->getReport()) {
+        if (!empty($parameters->getReport())) {
             $this->config['defaultReport'] = $parameters->getReport();
         }
 
@@ -70,7 +70,7 @@ class CodeStyle
             $this->config['includes'] = $parameters->getIncludes();
         }
 
-        if ($parameters->getNeosRoot()) {
+        if (!empty($parameters->getNeosRoot())) {
             $this->config['neosRoot'] = $parameters->getNeosRoot();
         }
     }

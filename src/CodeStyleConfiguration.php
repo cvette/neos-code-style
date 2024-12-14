@@ -28,6 +28,8 @@ class CodeStyleConfiguration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('codeStyle');
+
+        /** @var ArrayNodeDefinition $rootNode */
         $rootNode = $treeBuilder->getRootNode();
         $rootNode
             ->children()
@@ -71,8 +73,11 @@ class CodeStyleConfiguration implements ConfigurationInterface
     public function addOptionsNode(): ArrayNodeDefinition|VariableNodeDefinition|NodeDefinition|NodeBuilder|NodeParentInterface|null
     {
         $treeBuilder = new TreeBuilder('options');
-        return $treeBuilder->getRootNode()
-            ->useAttributeAsKey('name')->variablePrototype()
+
+        /** @var ArrayNodeDefinition $rootNode */
+        $rootNode = $treeBuilder->getRootNode();
+        return $rootNode->useAttributeAsKey('name')
+            ->variablePrototype()
             ->end();
     }
 
