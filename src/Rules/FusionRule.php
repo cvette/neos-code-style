@@ -28,7 +28,7 @@ abstract class FusionRule extends Rule
         $prev = $stream->getTokenAt($tokenStreamIndex - 1);
         $prevPrev = $stream->getTokenAt($tokenStreamIndex - 2);
 
-        if ($prev === null || $prevPrev === null) {
+        if ($prev === null) {
             return false;
         }
 
@@ -36,7 +36,7 @@ abstract class FusionRule extends Rule
         return ($prev->getType() === Token::FILE_START_TYPE
             || $prev->getType() === Token::LINE_BREAK
             || $prev->getType() === Token::WHITESPACE_TYPE
-            && ($prevPrev->getType() === Token::FILE_START_TYPE || $prevPrev->getType() === Token::LINE_BREAK));
+            && ($prevPrev?->getType() === Token::FILE_START_TYPE || $prevPrev?->getType() === Token::LINE_BREAK));
     }
 
     /**
