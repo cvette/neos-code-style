@@ -58,6 +58,7 @@ reports:
 
 neosRoot:
 files: []
+includes: []
 
 defaultReport: console
 defaultRuleSet: default

@@ -17,6 +17,11 @@ class Parameters
      */
     protected array $files = [];
 
+    /**
+     * @var string[]
+     */
+    protected array $includes = [];
+
     protected ?string $neosRoot;
 
     protected ?string $configFile;
@@ -40,6 +45,14 @@ class Parameters
     public function getFiles(): array
     {
         return $this->files;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getIncludes(): array
+    {
+        return $this->includes;
     }
 
     /**

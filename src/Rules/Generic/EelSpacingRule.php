@@ -26,6 +26,9 @@ class EelSpacingRule extends Rule
     function process(int $tokenStreamIndex, File $file, int $level): void
     {
         $current = $file->getTokenStream()->getTokenAt($tokenStreamIndex);
+        if ($current === null) {
+            return;
+        }
 
         if ($current->getType() == Token::EEL_START_TYPE) {
             $next = $file->getTokenStream()->getTokenAt($tokenStreamIndex + 1);

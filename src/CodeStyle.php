@@ -54,19 +54,23 @@ class CodeStyle
         $processor = new Processor();
         $this->config = $processor->processConfiguration(new CodeStyleConfiguration(), $configFiles);
 
-        if ($parameters->getRuleset()) {
+        if ($parameters->getRuleset() !== null && $parameters->getRuleset() !== '') {
             $this->config['defaultRuleSet'] = $parameters->getRuleset();
         }
 
-        if ($parameters->getReport()) {
+        if ($parameters->getReport() !== null && $parameters->getReport() !== '') {
             $this->config['defaultReport'] = $parameters->getReport();
         }
 
-        if (!empty($parameters->getFiles())) {
+        if ($parameters->getIncludes() !== null) {
+            $this->config['includes'] = $parameters->getIncludes();
+        }
+
+        if ($parameters->getFiles() !== null) {
             $this->config['files'] = $parameters->getFiles();
         }
 
-        if ($parameters->getNeosRoot()) {
+        if ($parameters->getNeosRoot() !== null && $parameters->getNeosRoot() !== '') {
             $this->config['neosRoot'] = $parameters->getNeosRoot();
         }
     }
@@ -83,6 +87,7 @@ class CodeStyle
         $this->packageCollection = new PackageCollection($this->config['neosRoot']);
         $this->fileCollection = new FileCollection($this->config['files'], $this->packageCollection);
 
+        $this->loadIncludes();
         $this->initRules();
         $this->initReport();
 
@@ -176,6 +181,8 @@ class CodeStyle
     {
         $rules = array_merge($this->config['ruleSets'][$ruleSet]['rules'], $rules);
         $includes = $this->config['ruleSets'][$ruleSet]['include'];
+
+        /** @var string $include */
         foreach ($includes as $include) {
             if (!isset($this->config['ruleSets'][$include])) {
                 throw new Exception('unknown ruleset: ' . $include);
@@ -252,6 +259,19 @@ class CodeStyle
         $rules = $ruleCollection->getRulesByTokenType($tokenType);
         foreach ($rules as $rule) {
             $rule->process($tokenStream->getPointer(), $file, $level);
+        }
+    }
+
+    protected function loadIncludes(): void
+    {
+        if (isset($this->config['includes'])) {
+            /** @var string $include */
+            foreach ($this->config['includes'] as $include) {
+                if (!file_exists($include)) {
+                    throw new \RuntimeException('include file does not exist: ' . $include);
+                }
+                require($include);
+            }
         }
     }
 }

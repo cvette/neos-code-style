@@ -39,7 +39,7 @@ class OnePrototypePerFileRule extends FusionRule
 
         if (isset($this->prototypesPerFile[$file->getRealPath()])
             && $this->prototypesPerFile[$file->getRealPath()] === true) {
-            $file->addError('Expecting only 1 prototype definition per file', $token->getLine(), $token->getColumn(), $this->severity);
+            $file->addError('Expecting only 1 prototype definition per file', $token?->getLine() ?? 0, $token?->getColumn() ?? 0, $this->severity);
         } else {
             $this->prototypesPerFile[$file->getRealPath()] = true;
         }

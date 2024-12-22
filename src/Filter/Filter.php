@@ -13,12 +13,13 @@ use FilesystemIterator;
  * Class Filter
  *
  * @package Vette\Neos\CodeStyle\Filter
+ * @psalm-suppress MissingTemplateParam
  */
 class Filter extends RecursiveFilterIterator
 {
 
     /**
-     * @var string[]
+     * @var array<string,bool>
      */
     protected array $acceptedPaths = [];
 
@@ -40,7 +41,12 @@ class Filter extends RecursiveFilterIterator
     {
         $filePath = (string)$this->current();
         $realPath = realpath($filePath);
-        if (($realPath !== false) && isset($this->acceptedPaths[$realPath]) === true) {
+
+        if ($realPath === false) {
+            return false;
+        }
+
+        if (isset($this->acceptedPaths[$realPath]) === true) {
             return false;
         }
 
@@ -63,8 +69,6 @@ class Filter extends RecursiveFilterIterator
 
     /**
      * Returns an iterator for the current entry.
-     *
-     * @return RecursiveFilterIterator|null
      */
     public function getChildren(): ?RecursiveFilterIterator
     {

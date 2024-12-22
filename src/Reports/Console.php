@@ -64,7 +64,7 @@ class Console extends Report
         };
     }
 
-    protected function colorLog($str, $type = Error::SEVERITY_INFO): string
+    protected function colorLog(string $str, string $type = Error::SEVERITY_INFO): string
     {
         return match ($type) {
             Error::SEVERITY_ERROR => "\033[31m$str \033[0m",

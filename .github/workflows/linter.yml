@@ -22,6 +22,8 @@ on:
   pull_request:
     branches: [master, main]
 
+permissions: { }
+
 ###############
 # Set the Job #
 ###############
@@ -32,6 +34,12 @@ jobs:
     # Set the agent to run on
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      packages: read
+      # To report GitHub Actions status checks
+      statuses: write
+
     ##################
     # Load all steps #
     ##################
@@ -40,7 +48,7 @@ jobs:
       # Checkout the code base #
       ##########################
       - name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
@@ -49,9 +57,13 @@ jobs:
       # Run Linter against code base #
       ################################
       - name: Lint Code Base
-        uses: github/super-linter@v4
+        uses: super-linter/super-linter@v7.2.0
         env:
           VALIDATE_ALL_CODEBASE: false
+          VALIDATE_PHP_PSALM: true
+          VALIDATE_PHP_BUILTIN: true
+          VALIDATE_GITHUB_ACTIONS: true
+          VALIDATE_GIT_MERGE_CONFLICT_MARKERS: true
           # Change to 'master' if your main branch differs
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -16,7 +16,7 @@ class File
 {
     protected string $path;
 
-    protected string|bool $realPath;
+    protected string $realPath;
 
     protected ?Package $package;
 
@@ -36,22 +36,18 @@ class File
      */
     public function __construct(string $path, ?Package $package = null)
     {
+        $realPath = realpath($path);
+
         $this->path = $path;
-        $this->realPath = realpath($path);
+        $this->realPath = $realPath === false ? '' : $realPath;
         $this->package = $package;
     }
 
-    /**
-     * @return string
-     */
     public function getPath(): string
     {
         return $this->path;
     }
 
-    /**
-     * @return string
-     */
     public function getRealPath(): string
     {
         return $this->realPath;
@@ -65,17 +61,11 @@ class File
         return $this->package;
     }
 
-    /**
-     * @return TokenStream
-     */
     public function getTokenStream(): TokenStream
     {
         return $this->tokenStream;
     }
 
-    /**
-     * @param TokenStream $tokenStream
-     */
     public function setTokenStream(TokenStream $tokenStream): void
     {
         $this->tokenStream = $tokenStream;

@@ -560,6 +560,10 @@ class Lexer
             $offset += strlen($match[0]);
         }
 
+        if ($token === '') {
+            return false;
+        }
+
         if (preg_match($token, $this->code, $match, 0, $this->cursor + $offset)) {
             return true;
         }

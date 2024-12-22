@@ -24,10 +24,13 @@ class CodeStyleConfiguration implements ConfigurationInterface
      * @inheritDoc
      *
      * @psalm-suppress PossiblyUndefinedMethod
+     * @psalm-suppress PossiblyNullReference
+     * @psalm-suppress UndefinedInterfaceMethod
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('codeStyle');
+        /** @var ArrayNodeDefinition $rootNode */
         $rootNode = $treeBuilder->getRootNode();
         $rootNode
             ->children()
@@ -35,6 +38,7 @@ class CodeStyleConfiguration implements ConfigurationInterface
                 ->scalarNode('defaultReport')->end()
                 ->scalarNode('neosRoot')->end()
                 ->arrayNode('files')->prototype('scalar')->end()->end()
+                ->arrayNode('includes')->prototype('scalar')->end()->end()
                 ->arrayNode('reports')
                     ->useAttributeAsKey('name')
                         ->arrayPrototype()
@@ -70,8 +74,11 @@ class CodeStyleConfiguration implements ConfigurationInterface
     public function addOptionsNode(): ArrayNodeDefinition|VariableNodeDefinition|NodeDefinition|NodeBuilder|NodeParentInterface|null
     {
         $treeBuilder = new TreeBuilder('options');
-        return $treeBuilder->getRootNode()
-            ->useAttributeAsKey('name')->variablePrototype()
+
+        /** @var ArrayNodeDefinition $rootNode */
+        $rootNode = $treeBuilder->getRootNode();
+        return $rootNode->useAttributeAsKey('name')
+            ->variablePrototype()
             ->end();
     }
 

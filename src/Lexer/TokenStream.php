@@ -11,6 +11,7 @@ use Iterator;
  * Class TokenStream
  *
  * @package Vette\FusionParser
+ * @template-implements Iterator<Token>
  */
 class TokenStream implements Iterator, Countable
 {
