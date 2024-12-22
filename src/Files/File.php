@@ -36,8 +36,10 @@ class File
      */
     public function __construct(string $path, ?Package $package = null)
     {
+        $realPath = realpath($path);
+
         $this->path = $path;
-        $this->realPath = realpath($path) ?: '';
+        $this->realPath = $realPath === false ? '' : $realPath;
         $this->package = $package;
     }
 

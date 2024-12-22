@@ -10,6 +10,7 @@ use Iterator;
  * Class PackageCollection
  *
  * @package Vette\Neos\CodeStyle\Packages
+ * @template-implements Iterator<Package>
  */
 class PackageCollection implements Iterator
 {

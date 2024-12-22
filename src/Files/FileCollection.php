@@ -16,6 +16,7 @@ use Vette\Neos\CodeStyle\Packages\PackageCollection;
  * Class FileCollection
  *
  * @package Vette\Neos\CodeStyle\Files
+ * @template-implements Iterator<File>
  */
 class FileCollection implements Iterator, Countable
 {

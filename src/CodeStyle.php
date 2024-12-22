@@ -54,23 +54,23 @@ class CodeStyle
         $processor = new Processor();
         $this->config = $processor->processConfiguration(new CodeStyleConfiguration(), $configFiles);
 
-        if (!empty($parameters->getRuleset())) {
+        if ($parameters->getRuleset() !== null && $parameters->getRuleset() !== '') {
             $this->config['defaultRuleSet'] = $parameters->getRuleset();
         }
 
-        if (!empty($parameters->getReport())) {
+        if ($parameters->getReport() !== null && $parameters->getReport() !== '') {
             $this->config['defaultReport'] = $parameters->getReport();
         }
 
-        if (!empty($parameters->getFiles())) {
-            $this->config['files'] = $parameters->getFiles();
-        }
-
-        if (!empty($parameters->getIncludes())) {
+        if ($parameters->getIncludes() !== null) {
             $this->config['includes'] = $parameters->getIncludes();
         }
 
-        if (!empty($parameters->getNeosRoot())) {
+        if ($parameters->getFiles() !== null) {
+            $this->config['files'] = $parameters->getFiles();
+        }
+
+        if ($parameters->getNeosRoot() !== null && $parameters->getNeosRoot() !== '') {
             $this->config['neosRoot'] = $parameters->getNeosRoot();
         }
     }

@@ -13,6 +13,7 @@ use FilesystemIterator;
  * Class Filter
  *
  * @package Vette\Neos\CodeStyle\Filter
+ * @psalm-suppress MissingTemplateParam
  */
 class Filter extends RecursiveFilterIterator
 {

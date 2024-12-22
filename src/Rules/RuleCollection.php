@@ -10,6 +10,7 @@ use Iterator;
  * Class RuleCollection
  *
  * @package Vette\Neos\CodeStyle\Packages
+ * @template-implements Iterator<array<Rule>>
  */
 class RuleCollection implements Iterator
 {
