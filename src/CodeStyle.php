@@ -62,11 +62,11 @@ class CodeStyle
             $this->config['defaultReport'] = $parameters->getReport();
         }
 
-        if ($parameters->getIncludes() !== null) {
+        if (!empty($parameters->getIncludes())) {
             $this->config['includes'] = $parameters->getIncludes();
         }
 
-        if ($parameters->getFiles() !== null) {
+        if (!empty($parameters->getFiles())) {
             $this->config['files'] = $parameters->getFiles();
         }
 
